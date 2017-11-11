@@ -53,10 +53,28 @@ class acaraController extends Controller
         $acara ->tanggal_mulai = $request ->tanggal_mulai;
         $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
         $acara ->alamat = $request ->alamat;
-        $acara ->statusSponsor = $request ->statusSponsor;
-        $acara ->statusMediaPartner = $request ->statusMediaPartner;
-        $acara ->statusOpenBooth = $request ->statusOpenBooth;
+
+        if(empty($request ->statusSponsor)){
+            $acara ->statusSponsor = 0;
+        }
+        else{
+            $acara ->statusSponsor = $request ->statusSponsor;
+        }
+        if(empty($request ->statusMediaPartner)){
+        $acara ->statusMediaPartner = 0;
+        }
+        else{
+            $acara ->statusMediaPartner = $request ->statusMediaPartner;
+        }
+        if(empty($request ->statusOpenBooth)){
+            $acara ->statusOpenBooth = 0;
+        }
+        else{
+            $acara ->statusOpenBooth = $request ->statusOpenBooth;
+        }
+
         $acara ->harga_tiket = $request ->harga_tiket;
+        $acara ->user_id = 41;
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
         $acara -> save();
