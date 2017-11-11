@@ -23,9 +23,9 @@ class CreateModelAcarasTable extends Migration
             $table->text('alamat');
             $table->string('harga_tiket');
             $table->string('jumlah_tiket');
-            $table->string('statusSponsor')->comment('1 iya 0 tidak');
-            $table->string('statusMediaPartner')->comment('1 iya 0 tidak');
-            $table->string('statusOpenBooth')->comment('1 iya 0 tidak');
+            $table->string('statusSponsor')->comment('1 iya 0 tidak')->default(0);
+            $table->string('statusMediaPartner')->comment('1 iya 0 tidak')->default(0);
+            $table->string('statusOpenBooth')->comment('1 iya 0 tidak')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -74,7 +74,7 @@ class acaraController extends Controller
         }
 
         $acara ->harga_tiket = $request ->harga_tiket;
-        $acara ->user_id = 41;
+        //$acara ->user_id = 41; error child and parrent constraint
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
         $acara -> save();
@@ -124,6 +124,7 @@ class acaraController extends Controller
      */
     public function destroy($id)
     {
-        //
+         acara::where('id',$id) ->delete();
+        return redirect()->back();
     }
 }
