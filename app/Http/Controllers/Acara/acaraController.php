@@ -26,7 +26,8 @@ class acaraController extends Controller
      */
     public function create()
     {
-        return view('kaleya.acara.addacara');    }
+        return view('kaleya.acara.addacara');    
+    }
 
     /**
      * Store a newly created resource in storage.
