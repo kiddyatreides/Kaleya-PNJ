@@ -18,14 +18,14 @@ class CreateModelAcarasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('judul');
             $table->text('deskripsi');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_berakhir');
+            $table->datetime('tanggal_mulai');
+            $table->datetime('tanggal_berakhir');
             $table->text('alamat');
             $table->string('harga_tiket');
             $table->string('jumlah_tiket');
-            $table->string('statusSponsor')->comment('1 iya 2 tidak');
-            $table->string('statusMediaPartner')->comment('1 iya 2 tidak');
-            $table->string('statusOpenBooth')->comment('1 iya 2 tidak');
+            $table->string('statusSponsor')->comment('1 iya 0 tidak');
+            $table->string('statusMediaPartner')->comment('1 iya 0 tidak');
+            $table->string('statusOpenBooth')->comment('1 iya 0 tidak');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

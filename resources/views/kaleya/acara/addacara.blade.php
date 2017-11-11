@@ -1,4 +1,7 @@
 @extends('kaleya/layouts/app')
+@section('headSection')
+<link rel="stylesheet" href="{{ asset('acara/plugins/timepicker/jquery.datetimepicker.min.css') }}">
+@endsection
 @section('main-content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -39,7 +42,7 @@
                                     <label for="Deskripsi">Deskripsi</label>
                                     <textarea class="form-control" rows="3" name="deskripsi" id="deskripsi" placeholder="Masukkan Deskripsi..."></textarea>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="tanggal_mulai">Tanggal Mulai:</label>
 
                                     <div class="input-group date">
@@ -57,12 +60,23 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input type="text" class="form-control pull-right datepicker" name="tanggal_berakhir" data-date-format="yyyy-mm-dd">
+                            </div> --}}
+                            <div class="form-group">
+                                <label>Tanggal Mulai:</label>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="alamat">Alamat Acara</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
-                        </div>
+                            <div>
+                                <input type="text" class="form-control pull-right datetimepicker" name="tanggal_mulai" data-date-format="yyyy-mm-dd H:i:s">
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Berakhir:</label>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control pull-right datetimepicker" name="tanggal_berakhir" data-date-format="yyyy-mm-dd H:i:s">
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat Acara</label>
+                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
+                            </div>
                     </div>
                     <div class="col-lg-6">
                         <small>Open For:</small>
@@ -117,13 +131,16 @@
 @endsection
 
 @section('footerSection')
+<script src="{{ asset('acara/plugins/timepicker/jquery.datetimepicker.full.js') }}"></script>
+<script src="{{ asset('acara/plugins/timepicker/jquery.datetimepicker.full.min.js') }}"></script>
 <script>
-    $(function() {
-        $( ".datepicker" ).datepicker({
-            todayHighlight: true,
-            changeMonth: true,
-            changeYear: true
-        });
-    });
+    // $(function() {
+    //     $( ".datepicker" ).datepicker({
+    //         todayHighlight: true,
+    //         changeMonth: true,
+    //         changeYear: true
+    //     });
+    // });
+    $( ".datetimepicker" ).datetimepicker();
 </script>
 @endsection
