@@ -46,7 +46,7 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right" name="tanggal_mulai" id="datepicker">
+                                    <input type="text" class="form-control pull-right datepicker" name="tanggal_mulai" data-date-format="yyyy-mm-dd">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -56,7 +56,7 @@
                                   <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control pull-right" name="tanggal_berakhir" id="datepicker1">
+                                <input type="text" class="form-control pull-right datepicker" name="tanggal_berakhir" data-date-format="yyyy-mm-dd">
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,22 +119,11 @@
 @section('footerSection')
 <script>
     $(function() {
-        $( "#datepicker" ).datepicker({
-            dateFormat: 'dd-mm-yy',
+        $( ".datepicker" ).datepicker({
+            todayHighlight: true,
             changeMonth: true,
-            changeYear: true});
-    });
-    // $('#datepicker').datepicker({
-    //   autoclose: true
-    // })
-    // $('#datepicker1').datepicker({
-    //   autoclose: true
-    // })
-    $(function() {
-        $( "#datepicker1" ).datepicker({
-            dateFormat: 'dd-mm-yy',
-            changeMonth: true,
-            changeYear: true});
+            changeYear: true
+        });
     });
 </script>
 @endsection
