@@ -27,8 +27,8 @@
                     @include('kaleya.includes.messages')
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="#" method="post" enctype="multipart/form-data">
-                        {{-- {{csrf_field()}} --}}
+                    <form role="form" action="{{ route('acara.store') }}" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
                         <div class="box-body">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -50,66 +50,66 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                    <label>Tanggal Berakhir:</label>
+                                <label>Tanggal Berakhir:</label>
 
-                                    <div class="input-group date">
-                                      <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control pull-right" name="tanggal_berakhir" id="datepicker1">
+                                <div class="input-group date">
+                                  <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="alamat">Alamat Acara</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
+                                <input type="text" class="form-control pull-right" name="tanggal_berakhir" id="datepicker1">
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <small>Open For:</small>
-                            <br>
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="statusSponsor" type="checkbox" value="1"> Sponsor
-                                    </label>
-                                </div>
-                                <br>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="statusMediaPartner" type="checkbox" value="1"> Media
-                                    </label>
-                                </div>
-                                <br>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="statusOpenBooth" type="checkbox" value="1"> Booth
-                                    </label>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="harga_tiket">Harga Tiket</label>
-                                <input type="text" class="form-control" id="harga_tiket" name="harga_tiket" placeholder="input harga">
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah_tiket">Jumlah Tiket</label>
-                                <input type="text" class="form-control" id="jumlah_tiket" name="jumlah_tiket" placeholder="input jumlah">
-                            </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat Acara</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
                         </div>
                     </div>
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a type="button" href="#" class="btn btn-warning">Back</a>
+                    <div class="col-lg-6">
+                        <small>Open For:</small>
+                        <br>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="statusSponsor" type="checkbox" value="1"> Sponsor
+                                </label>
+                            </div>
+                            <br>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="statusMediaPartner" type="checkbox" value="1"> Media
+                                </label>
+                            </div>
+                            <br>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="statusOpenBooth" type="checkbox" value="1"> Booth
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="harga_tiket">Harga Tiket</label>
+                            <input type="text" class="form-control" id="harga_tiket" name="harga_tiket" placeholder="input harga">
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah_tiket">Jumlah Tiket</label>
+                            <input type="text" class="form-control" id="jumlah_tiket" name="jumlah_tiket" placeholder="input jumlah">
+                        </div>
                     </div>
-                    <!-- /.box-body -->
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a type="button" href="#" class="btn btn-warning">Back</a>
+                </div>
+                <!-- /.box-body -->
 
-                </form>
+            </form>
 
-            </div>
-            <!-- /.col-->
         </div>
+        <!-- /.col-->
     </div>
-    <!-- ./row -->
+</div>
+<!-- ./row -->
 </section>
 <!-- /.content -->
 </div>
@@ -118,11 +118,23 @@
 
 @section('footerSection')
 <script>
-    $('#datepicker').datepicker({
-      autoclose: true
-    })
-    $('#datepicker1').datepicker({
-      autoclose: true
-    })
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true});
+    });
+    // $('#datepicker').datepicker({
+    //   autoclose: true
+    // })
+    // $('#datepicker1').datepicker({
+    //   autoclose: true
+    // })
+    $(function() {
+        $( "#datepicker1" ).datepicker({
+            dateFormat: 'dd-mm-yy',
+            changeMonth: true,
+            changeYear: true});
+    });
 </script>
 @endsection

@@ -19,10 +19,12 @@ Route::get('kaleya', function () {
     return view('kaleya.home');
 });
 
-Route::get('kaleya/acara', function () {
+Route::get('kaleya/acaras', function () {
     return view('kaleya.acara.show');
 });
 
 Route::get('kaleya/addacara', function () {
     return view('kaleya.acara.addacara');
 });
+
+Route::resource('kaleya/acara','Acara\acaraController');

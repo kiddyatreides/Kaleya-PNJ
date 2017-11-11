@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
                 'tipe' => random_int(1,2),
                 'nohp' => $faker->phoneNumber,
                 'alamat' => $faker->address,
-                'created_at' => date('Y-M-D h:i:s')
+                'created_at' => date('Y-m-d H:i:s')
             ]);
         }
     }

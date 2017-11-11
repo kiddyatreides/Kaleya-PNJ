@@ -18,8 +18,8 @@ class CreateModelAcarasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('judul');
             $table->text('deskripsi');
-            $table->dateTime('tanggal_mulai');
-            $table->dateTime('tanggal_berakhir');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_berakhir');
             $table->text('alamat');
             $table->string('harga_tiket');
             $table->string('jumlah_tiket');
