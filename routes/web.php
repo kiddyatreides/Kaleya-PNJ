@@ -33,3 +33,7 @@ Route::get('kaleya/addacara', function () {
 });
 
 Route::resource('kaleya/acara','Acara\acaraController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
