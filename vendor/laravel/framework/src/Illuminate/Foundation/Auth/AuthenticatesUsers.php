@@ -16,7 +16,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('kaleya.acara.login');
     }
 
     /**
@@ -124,7 +124,14 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        $errors = [$this->username() => trans('auth.failed')];
+        //$errors = [$this->username() => trans('auth.failed')];
+        $fields = $this->credentials($request);
+        if ($fields['email'] == 'inactive') {
+            $errors = $fields['password'];
+        }
+        else{
+             $errors = [$this->username() => trans('auth.failed')];
+        }
 
         if ($request->expectsJson()) {
             return response()->json($errors, 422);
@@ -157,7 +164,7 @@ trait AuthenticatesUsers
 
         $request->session()->invalidate();
 
-        return redirect('/');
+        return redirect('acara-login');
     }
 
     /**

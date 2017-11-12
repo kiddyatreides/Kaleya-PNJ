@@ -21,6 +21,7 @@ class CreateModelUsersTable extends Migration
             $table->integer('tipe')->unsigned();
             $table->string('nohp');
             $table->text('alamat');
+            $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('tipe')->references('id')->on('user_type');

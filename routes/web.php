@@ -37,5 +37,10 @@ Route::get('kaleya/addacara', function () {
 
 Route::resource('kaleya/acara','Acara\acaraController');
 
+<<<<<<< HEAD
+=======
+Auth::routes();
+//localhost:8000/acara-login = akses acara login page
+>>>>>>> f3e78dbe6f9689bb48f02c5e2cee20c136848e8c
 
 Route::get('/home', 'HomeController@index')->name('home');
