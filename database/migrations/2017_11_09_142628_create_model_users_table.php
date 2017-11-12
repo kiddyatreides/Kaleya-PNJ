@@ -21,6 +21,7 @@ class CreateModelUsersTable extends Migration
             $table->string('tipe')->comment('1 penyedia acara 2 user biasa');
             $table->string('nohp');
             $table->text('alamat');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
