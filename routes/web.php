@@ -11,6 +11,11 @@
 |
 */
 
+Route::post('sendSms','smsController@store');
+Route::post('sendSms2','smsController@sendSms');
+Route::get('data','smsController@getData');
+Route::get('test','smsController@testGetData');
+
 Route::get('/', function () {
     return view('frontend.homepage.index');
 });
