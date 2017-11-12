@@ -113,7 +113,7 @@
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a type="button" href="#" class="btn btn-warning">Back</a>
+                    <a type="button" href="{{ route('acara.index') }}" class="btn btn-warning">Back</a>
                 </div>
                 <!-- /.box-body -->
 

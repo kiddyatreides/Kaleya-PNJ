@@ -22,7 +22,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Acara Kaleya</h3>
-                <a class='col-lg-offset-5 btn btn-success' href="#">Add Acara</a>
+                <a class='col-lg-offset-5 btn btn-success' href="{{ route('acara.create') }}">Add Acara</a>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -61,7 +61,7 @@
                                         <td>{{$acara ->tanggal_berakhir}}</td>
                                         <td>{{$acara ->jumlah_tiket}}</td>
                                         <td>{{$acara ->harga_tiket}}</td>
-                                        <td><a href="#"><span class="glyphicon glyphicon-edit"></span></a></td>
+                                        <td><a href="{{route('acara.edit',$acara ->id)}}"><span class="glyphicon glyphicon-edit"></span></a></td>
                                         <td>
                                             <form method="post" id="delete-form-{{$acara->id}}" action="{{route('acara.destroy',$acara ->id)}}" style="display: none">
                                                 {{csrf_field()}}

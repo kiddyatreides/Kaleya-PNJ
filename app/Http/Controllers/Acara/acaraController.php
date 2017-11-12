@@ -102,7 +102,8 @@ class acaraController extends Controller
      */
     public function edit($id)
     {
-        //
+         $acara = acara::where('id',$id) ->first();
+        return view('kaleya.acara.edit',compact('acara'));
     }
 
     /**
@@ -114,7 +115,49 @@ class acaraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request, [
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            //'tanggal_mulai' => 'required|date_format:"d-m-Y"',
+            //'tanggal_berakhir' => 'required|date_format:"d-m-Y"',
+            'alamat' => 'required',
+            'harga_tiket' => 'required|numeric',
+            'jumlah_tiket' => 'required|numeric',
+        ]);
+        $tanggal_mulai = date("Y-m-d");
+        $tanggal_berakhir = date("Y-m-d");
+        $acara = acara::find($id);
+        $acara ->judul = $request ->judul;
+        $acara ->deskripsi = $request ->deskripsi;
+        $acara ->tanggal_mulai = $request ->tanggal_mulai;
+        $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
+        $acara ->alamat = $request ->alamat;
+
+        if(empty($request ->statusSponsor)){
+            $acara ->statusSponsor = 0;
+        }
+        else{
+            $acara ->statusSponsor = $request ->statusSponsor;
+        }
+        if(empty($request ->statusMediaPartner)){
+        $acara ->statusMediaPartner = 0;
+        }
+        else{
+            $acara ->statusMediaPartner = $request ->statusMediaPartner;
+        }
+        if(empty($request ->statusOpenBooth)){
+            $acara ->statusOpenBooth = 0;
+        }
+        else{
+            $acara ->statusOpenBooth = $request ->statusOpenBooth;
+        }
+
+        $acara ->harga_tiket = $request ->harga_tiket;
+        $acara ->jumlah_tiket = $request ->jumlah_tiket;
+
+        $acara -> save();
+
+        return redirect(route('acara.index'));
     }
 
     /**
