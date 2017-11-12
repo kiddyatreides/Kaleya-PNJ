@@ -45,12 +45,8 @@ class smsController extends Controller
     }
 
     public function testGetData(){
-        $ch = curl_init();
-        $url = "localhost:8000/data";
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_exec($ch);
-        print_r(curl_getinfo($ch));
-        curl_close($ch);
+        $client = new \GuzzleHttp\Client();
+
     }
 
     public function sendSms(Request $request){

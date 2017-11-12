@@ -13,11 +13,14 @@
 
 Route::post('sendSms','smsController@store');
 Route::post('sendSms2','smsController@sendSms');
-Route::get('data','smsController@getData');
-Route::get('test','smsController@testGetData');
+
 
 Route::get('/', function () {
     return view('frontend.homepage.index');
+});
+
+Route::get('/login', function () {
+    return view('frontend.register-login.index');
 });
 
 Route::get('kaleya', function () {
@@ -34,6 +37,5 @@ Route::get('kaleya/addacara', function () {
 
 Route::resource('kaleya/acara','Acara\acaraController');
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
