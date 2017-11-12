@@ -128,7 +128,7 @@
 
                 <li><a href="contact-us.html">Contact</a></li>
 
-                <li><a href="free-seo-analysis.html" class="purchase scrool">MASUK / DAFTAR</a></li>
+                <li><a href="#" class="purchase scrool">MASUK / DAFTAR</a></li>
 
                 <li class="dropdown hidden-nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle">How to Reach Us</a>
                     <ul role="menu" class="dropdown-menu">
@@ -145,6 +145,12 @@
 
     </div>
     <!-- end container -->
+
+    <script type="text/javascript">
+        function sweet(){
+            swal("Good job!", "You clicked the button!", "success");
+        }
+    </script>
 
 </div>
 <!-- end navbar -->

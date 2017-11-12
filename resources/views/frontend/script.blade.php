@@ -6,10 +6,14 @@
 <script src="/frontend/js/plugins.js"></script>
 <script src="/frontend/js/custom.js"></script>
 
+<script src="/frontend/calendar/js/moment.min.js"></script>
+<script src="/frontend/calendar/js/fullcalendar.js"></script>
+
 <!-- REVOLUTION JS FILES -->
 <script src="/frontend/js/rev-slider.js"></script>
 <script type="text/javascript" src="/frontend/revolution/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="/frontend/revolution/js/jquery.themepunch.revolution.min.js"></script>
+
 
 <!-- SLIDER REVOLUTION 5.0 EXTENSIONS
     (Load Extensions only on Local File Systems !

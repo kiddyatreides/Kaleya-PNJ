@@ -27,6 +27,7 @@
 <link href="https://cdn.bootcss.com/pixeden-stroke-7-icon/1.2.3/dist/pe-icon-7-stroke.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <!-- REVOLUTION STYLE SHEETS -->
 <link rel="stylesheet" type="text/css" href="/frontend/revolution/css/settings.css">
 <!-- REVOLUTION LAYERS STYLES -->
@@ -38,10 +39,24 @@
 <!-- Font Favicon -->
 <link rel="shortcut icon" href="/frontend/images/favicon.ico">
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/frontend/calendar/js/fullcalendar.min.css">
+
+
+<style>
+    #calendar {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+</style>
+
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>
 <script src="/frontend/js/html5shiv.js"></script>
 <script src="/frontend/js/respond.min.js"></script>
+
 <![endif]-->
 
 <!--headerIncludes-->

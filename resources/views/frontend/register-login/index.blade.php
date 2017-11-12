@@ -76,7 +76,7 @@
                     <!--end success message -->
 
                     <!--begin contact form -->
-                    <form id="contact-form" class="contact" action="php/contact.php" method="post">
+                    <form id="contact-form" class="contact" action="#" method="post">
 
                         <input class="contact-input white-input" required="" name="name" placeholder="Nama Lengkap*" type="text">
                         <input class="contact-input white-input" required="" name="email" placeholder="Alamat Email*" type="email">
@@ -105,4 +105,9 @@
         <!--end container-->
 
     </section>
+    <script type="text/javascript">
+        function click(){
+            swal("Good job!", "You clicked the button!", "success");
+        }
+    </script>
 @endsection
