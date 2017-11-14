@@ -14,8 +14,11 @@
 //Route::post('sendSms','smsController@store');
 //Route::post('sendSms2','smsController@sendSms');
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('login','userController@login');
 Route::get('test','userController@test');
+Route::get('home','userController@index');
 Route::post('loginPost','userController@loginPost');
 Route::post('registerPost','userController@registerPost');
 
@@ -27,10 +30,6 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
-});
-
-Route::get('/login', function () {
-    return view('frontend.register-login.index');
 });
 
 Route::get('kaleya', function () {
