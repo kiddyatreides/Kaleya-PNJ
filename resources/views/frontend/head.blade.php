@@ -43,7 +43,6 @@
 
 <link rel="stylesheet" type="text/css" href="/frontend/calendar/js/fullcalendar.min.css">
 
-
 <style>
     #calendar {
         max-width: 900px;

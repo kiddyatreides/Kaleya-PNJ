@@ -11,19 +11,13 @@
 |
 */
 
-//Route::post('sendSms','smsController@store');
-//Route::post('sendSms2','smsController@sendSms');
-
-Route::get('login','userController@login');
-Route::get('test','userController@test');
-Route::post('loginPost','userController@loginPost');
-Route::post('registerPost','userController@registerPost');
+Route::post('sendSms','smsController@store');
+Route::post('sendSms2','smsController@sendSms');
 
 
 Route::get('/', function () {
     return view('frontend.homepage.index');
 });
-
 
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
@@ -37,8 +31,8 @@ Route::get('kaleya', function () {
     return view('kaleya.home');
 });
 
-Route::get('/chat', function () {
-    return view('frontend.chat');
+Route::get('pesan', function () {
+    return view('frontend.pesan');
 });
 
 Route::get('kaleya/acaras', function () {
