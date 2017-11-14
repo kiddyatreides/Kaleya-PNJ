@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\modelAcara;
 use App\modelUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,8 +19,12 @@ class userController extends Controller
      */
     public function index()
     {
-        //
-        return view('user.index');
+        $user = modelAcara::all();
+
+        $data = [
+          'user' => $user
+        ];
+        return view('frontend.user.index',$data);
     }
 
     /**
@@ -93,30 +98,35 @@ class userController extends Controller
     }
 
     public function loginPost(Request $request){
-        $email = $request->email;
-        $password = $request->password;
+        try {
 
-        $data = ModelUser::where('email',$email)->first();
-        if(count($data) > 0){ //apakah email tersebut ada atau tidak
-            if(Hash::check($password,$data->password)){
-                Session::put('id',$data->id);
-                Session::put('name',$data->name);
-                Session::put('email',$data->email);
-                Session::put('login',TRUE);
-                if($data->tipe == 1){ //berarti dia penyedia acara
-                    //input kode disini
+
+            $email = $request->email;
+            $password = $request->password;
+
+            $data = ModelUser::where('email', $email)->first();
+            if (count($data) > 0) { //apakah email tersebut ada atau tidak
+                if (Hash::check($password, $data->password)) {
+                    Session::put('id', $data->id);
+                    Session::put('name', $data->nama);
+                    Session::put('email', $data->email);
+                    Session::put('login', TRUE);
+                    if ($data->tipe == 1) { //berarti dia penyedia acara
+                        //input kode disini
+                    } else {
+                        return redirect('home');
+                    }
+                } else {
+                    return redirect('login')->with('alert-success', '<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
                 }
-                else{
-                    return redirect('home');
-                }
-            }
-            else{
-                return redirect('login')->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
+            } else {
+                return redirect('login')->with('alert-success', '<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
             }
         }
-        else{
-            return redirect('login')->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
+        catch (Exception $e){
+            return response ($e->getMessage());
         }
+
     }
 
     public function logout(){
@@ -132,7 +142,7 @@ class userController extends Controller
         try{
             $this->validate($request, [
                 'name' => 'required|min:4',
-                'email' => 'required|min:4|email|unique:users',
+                'email' => 'required|unique:users',
                 'phone' => 'required|min:4',
                 'address' => 'required',
                 'password' => 'required',

@@ -41,14 +41,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         @endif
 
         <form action="/registerPost" method="post">
-            <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required="">
-            <input type="text" name="email" class="form-control" placeholder="Email" required="">
+            <input type="email" name="email" class="form-control" placeholder="Email" required="">
+            <br>
             <input type="password" name="password" class="form-control" placeholder="Password" required="">
             <input type="password" name="confirmation" class="form-control" placeholder="Konfirmasi Password" required="">
+            <input type="text" name="name" class="form-control" placeholder="Nama Lengkap" required="">
             <input type="text" name="phone" class="form-control" placeholder="Nomor Telfon" required="">
-            <input type="text" name="alamat" class="form-control" placeholder="Alamat" required="">
+            <input type="text" name="address" class="form-control" placeholder="Alamat" required="">
 
-            <select type="text" name="email" class="form-control" required="">
+            <select type="text" name="type" class="form-control" required="">
                 <option value="">-- Siapakah Dirimu ? --</option>
                 @foreach(\App\modelTipe::all() as $cihuy)
                     <option value="{{ $cihuy->id }}">{{ $cihuy->nama }}</option>
