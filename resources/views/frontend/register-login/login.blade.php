@@ -50,11 +50,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <select type="text" name="email" class="form-control" required="">
                 <option value="">-- Siapakah Dirimu ? --</option>
-                <option value="1">Penyedia Acara</option>
-                <option value="2">Masyarakat</option>
-                <option value="3">Sponsor</option>
-                <option value="4">Media Partner</option>
-                <option value="5">Pengusaha</option>
+                @foreach(\App\modelTipe::all() as $cihuy)
+                    <option value="{{ $cihuy->id }}">{{ $cihuy->nama }}</option>
+                @endforeach
             </select>
             <br>
             <button type="submit" class="btn btn-md btn-primary">Daftar</button>
