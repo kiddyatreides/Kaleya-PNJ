@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,38 +9,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::post('sendSms','smsController@store');
-Route::post('sendSms2','smsController@sendSms');
-
-
+//Route::post('sendSms','smsController@store');
+//Route::post('sendSms2','smsController@sendSms');
+use Illuminate\Support\Facades\Route;
+Route::get('login','userController@login');
+Route::get('test','userController@test');
+Route::get('home','userController@index');
+Route::post('loginPost','userController@loginPost');
+Route::post('registerPost','userController@registerPost');
 Route::get('/', function () {
     return view('frontend.homepage.index');
 });
-
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
 });
-
-Route::get('/login', function () {
-    return view('frontend.register-login.index');
-});
-
 Route::get('kaleya', function () {
     return view('kaleya.home');
 });
+Route::get('kaleya/acaras', function () {
+    return view('kaleya.acara.show');
+});
+Route::get('kaleya/addacara', function () {
+    return view('kaleya.acara.addacara');
+});
+Route::resource('kaleya/acara','Acara\acaraController');
 
 Route::get('pesan', function () {
     return view('frontend.pesan');
 });
-
-Route::get('kaleya/acaras', function () {
-    return view('kaleya.acara.show');
-});
-
-Route::get('kaleya/addacara', function () {
-    return view('kaleya.acara.addacara');
-});
-
-Route::resource('kaleya/acara','Acara\acaraController');
-

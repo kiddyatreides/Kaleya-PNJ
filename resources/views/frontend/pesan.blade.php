@@ -6,7 +6,7 @@
 		<div class="col-lg-offset-4 col-lg-6">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Add Message here <a href="#" class="pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></h3>
+					<h3 class="panel-title">Kirim Pesan <a href="#" class="pull-right" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></h3>
 				</div>
 				<div class="panel-body">
 					<ul class="list-group">
@@ -27,7 +27,7 @@
 						<h4 class="modal-title">Modal title</h4>
 					</div>
 					<div class="modal-body">
-						<p>One fine body&hellip;</p>
+						<p><input type="text" placeholder="TKirim pesan disini..." id="addItem"></p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

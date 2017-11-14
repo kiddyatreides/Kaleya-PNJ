@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\modelUser;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
 class userController extends Controller
@@ -86,28 +88,34 @@ class userController extends Controller
     }
 
     public function login(){
-        return view('frontend.register-login.index');
+        return view('frontend.register-login.login');
     }
 
     public function loginPost(Request $request){
-
+        $input = Input::all();
         $email = $request->email;
         $password = $request->password;
 
         $data = ModelUser::where('email',$email)->first();
         if(count($data) > 0){ //apakah email tersebut ada atau tidak
             if(Hash::check($password,$data->password)){
+                Session::put('id',$data->id);
                 Session::put('name',$data->name);
                 Session::put('email',$data->email);
                 Session::put('login',TRUE);
-                return redirect('home_user');
+                if($input['tipe'] == "penyedia"){
+                    //input kode disini
+                }
+                else{
+                    return redirect('home');
+                }
             }
             else{
-                return redirect('login')->with('alert','Password atau Email, Salah !');
+                return redirect('login')->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
             }
         }
         else{
-            return redirect('login')->with('alert','Password atau Email, Salahaa!');
+            return redirect('login')->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
         }
     }
 
@@ -116,9 +124,9 @@ class userController extends Controller
         return redirect('login')->with('alert','Kamu sudah logout');
     }
 
-    public function register(Request $request){
-        return view('register');
-    }
+//    public function register(Request $request){
+//        return view('frontend.register-login.register');
+//    }
 
     public function registerPost(Request $request){
         try{
@@ -139,10 +147,10 @@ class userController extends Controller
             $data->tipe = $request->type;
             $data->password = bcrypt($request->password);
             if($data->save()){
-                return back()->with('alert-success','<script> window.onload = success()</script>');
+                return back()->with('alert-success','<script> window.onload = swal("Sukses!", "Berhasil Daftar !", "success")</script>');
             }
             else{
-                return back()->with('alert-success','<script> window.onload = failed()</script>');
+                return back()->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Gagal Daftar!" ,  "error" )</script>');
             }
 
         }
@@ -152,6 +160,6 @@ class userController extends Controller
     }
 
     public function test(){
-        return redirect('/login')->with('alert-success','<script> window.onload = swal("Error,Akses ini hanya dimiliki oleh Kominfo!,error")</script>');
+        return redirect('/login')->with('alert-success','<script> window.onload = swal ( "Oops" ,  "Something went wrong!" ,  "error" )</script>');
     }
 }
