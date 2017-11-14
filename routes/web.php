@@ -33,7 +33,6 @@ Route::get('kaleya/addacara', function () {
     return view('kaleya.acara.addacara');
 });
 Route::resource('kaleya/acara','Acara\acaraController');
-
-Route::get('pesan', function () {
-    return view('frontend.pesan');
-});
+//pesan controller
+Route::get('pesan','PesanController@index');
+Route::get('pesan','PesanController@create');
