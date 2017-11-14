@@ -39,6 +39,7 @@
 		</div><!-- /.modal -->
 	</div>
 </div>
+{{csrf_field()}}
 <script>
 	$(document).ready(function() {
 		$('.ourItem').each(function() {
@@ -53,13 +54,18 @@
 			});
 		});
 		$('#addNew').click(function(event) {
-				$('#title').text('Tulis Pesan');
-				$('#addItem').val("");
-				$('#delete').hide('400');
-				$('#SaveChanges').hide('400');
-				$('#AddButton').show('400');
-				console.log(text);
+			$('#title').text('Tulis Pesan');
+			$('#addItem').val("");
+			$('#delete').hide('400');
+			$('#SaveChanges').hide('400');
+			$('#AddButton').show('400');
+		});
+		$('#AddButton').click(function(event) {
+			var text = $('#addItem').val();
+			$.post('pesan', {'text': text,'_token':$('input[name=_token]').val()}, function(data) {
+				console.log(data);
 			});
 		});
+	});
 </script>
 @endsection
