@@ -27,7 +27,6 @@
 <link href="https://cdn.bootcss.com/pixeden-stroke-7-icon/1.2.3/dist/pe-icon-7-stroke.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 <!-- REVOLUTION STYLE SHEETS -->
 <link rel="stylesheet" type="text/css" href="/frontend/revolution/css/settings.css">
 <!-- REVOLUTION LAYERS STYLES -->

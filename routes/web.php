@@ -31,6 +31,10 @@ Route::get('kaleya', function () {
     return view('kaleya.home');
 });
 
+Route::get('/chat', function () {
+    return view('frontend.chat');
+});
+
 Route::get('kaleya/acaras', function () {
     return view('kaleya.acara.show');
 });
