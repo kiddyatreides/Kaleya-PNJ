@@ -35,4 +35,4 @@ Route::get('kaleya/addacara', function () {
 Route::resource('kaleya/acara','Acara\acaraController');
 //pesan controller
 Route::get('pesan','PesanController@index');
-Route::get('pesan','PesanController@create');
+Route::post('pesan','PesanController@create');
