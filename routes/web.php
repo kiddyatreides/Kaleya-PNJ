@@ -11,13 +11,19 @@
 |
 */
 
-Route::post('sendSms','smsController@store');
-Route::post('sendSms2','smsController@sendSms');
+//Route::post('sendSms','smsController@store');
+//Route::post('sendSms2','smsController@sendSms');
+
+Route::get('login','userController@login');
+Route::get('test','userController@test');
+Route::post('loginPost','userController@loginPost');
+Route::post('registerPost','userController@registerPost');
 
 
 Route::get('/', function () {
     return view('frontend.homepage.index');
 });
+
 
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
