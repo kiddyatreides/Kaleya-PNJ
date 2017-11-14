@@ -17,6 +17,9 @@
     @include('frontend.components.header')
 </header>
 <!--end header -->
+@if(\Illuminate\Support\Facades\Session::has('sweet-alert'))
+    {!! \Illuminate\Support\Facades\Session::get('sweet-alert') !!}
+@endif
 
 @yield('content')
 

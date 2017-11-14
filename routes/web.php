@@ -12,15 +12,25 @@
 //Route::post('sendSms','smsController@store');
 //Route::post('sendSms2','smsController@sendSms');
 use Illuminate\Support\Facades\Route;
+Route::middleware(['checkLogin'])->group(function () {
+    Route::get('home','AcaraFrontendController@index');
+    Route::get('acara/{id}','AcaraFrontendController@show');
+    Route::post('reviewPost/{id}','AcaraFrontendController@store');
+
+    Route::get('logout','userController@logout');
+});
+
 Route::get('login','userController@login');
-Route::get('logout','userController@logout');
-Route::get('test','userController@test');
-Route::get('home','userController@index');
 Route::post('loginPost','userController@loginPost');
 Route::post('registerPost','userController@registerPost');
-Route::get('/', function () {
-    return view('frontend.homepage.index');
-});
+
+Route::get('test','userController@test');
+
+
+//Route::get('/acarad', function () {
+//    return view('frontend.acara.show');
+//});
+
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
 });
@@ -36,4 +46,4 @@ Route::get('kaleya/addacara', function () {
 Route::resource('kaleya/acara','Acara\acaraController');
 //pesan controller
 Route::get('pesan','PesanController@index');
-Route::get('pesan','PesanController@create');
+Route::post('pesan','PesanController@create');

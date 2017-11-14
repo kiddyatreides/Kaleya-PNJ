@@ -18,6 +18,8 @@ class CreateModelAcarasTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('judul');
             $table->text('deskripsi');
+            $table->text('foto');
+            $table->text('urlfoto');
             $table->datetime('tanggal_mulai');
             $table->datetime('tanggal_berakhir');
             $table->text('alamat');

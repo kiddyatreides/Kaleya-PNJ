@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\modelAcara;
+use App\modelReview;
 use App\modelUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,12 +20,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $user = modelAcara::all();
 
-        $data = [
-          'user' => $user
-        ];
-        return view('frontend.user.index',$data);
     }
 
     /**
@@ -43,9 +39,9 @@ class userController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -131,7 +127,7 @@ class userController extends Controller
 
     public function logout(){
         Session::flush();
-        return redirect('login')->with('alert','Kamu sudah logout');
+        return redirect('login')->with('alert-success','<script> window.onload = swal("Sukses!", "Kamu telah logout!", "success")</script>');
     }
 
 //    public function register(Request $request){
