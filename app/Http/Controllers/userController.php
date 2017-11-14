@@ -19,6 +19,7 @@ class userController extends Controller
     public function index()
     {
         //
+        return view('user.index');
     }
 
     /**
@@ -92,7 +93,6 @@ class userController extends Controller
     }
 
     public function loginPost(Request $request){
-        $input = Input::all();
         $email = $request->email;
         $password = $request->password;
 
@@ -103,7 +103,7 @@ class userController extends Controller
                 Session::put('name',$data->name);
                 Session::put('email',$data->email);
                 Session::put('login',TRUE);
-                if($input['tipe'] == "penyedia"){
+                if($data->tipe == 1){ //berarti dia penyedia acara
                     //input kode disini
                 }
                 else{
