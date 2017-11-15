@@ -20,6 +20,10 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('logout','userController@logout');
 });
 
+Route::get('/', function () {
+    return view('frontend.homepage.index');
+});
+
 Route::get('login','userController@login');
 Route::post('loginPost','userController@loginPost');
 Route::post('registerPost','userController@registerPost');
