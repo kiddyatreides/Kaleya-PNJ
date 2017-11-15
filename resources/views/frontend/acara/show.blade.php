@@ -1,6 +1,8 @@
 @extends('frontend.base')
 @section('content')
-    @include('frontend.user.menu')
+    @foreach($acaras as $x)
+        @include('frontend.user.menu', ['menu' => "Detail Acara $x->judul"])
+    @endforeach
     <section class="section-white small-padding">
 
     <!--begin container-->
@@ -30,19 +32,57 @@
                         <h3 class="blog-title"><a href="#">{{ $x->judul }}</a></h3>
 
                         @foreach(\App\modelUser::where('id',$x->user_id)->get() as $y)
-                            <a href="#" class="blog-icons"><i class="icon icon-user"></i> {{ $y->nama }}</a>
-
-                        <a href="#" class="blog-icons last"><i class="icon icon-calendar"></i> {{$x->tanggal_mulai }}</a>
+                            <a href="#" class="blog-icons" id="nameAcara"><i class="icon icon-user"></i> {{ $y->nama }}</a>
+                            <a href="#" class="blog-icons last"><i class="icon icon-calendar"></i> {{$x->tanggal_mulai }}</a>
+                            <a href="#" class="blog-icons last"><i class="icon icon-calendar"></i> {{$x->tanggal_berakhir }}</a>
                         @endforeach
 
                         <p>{{ $x->deskripsi }}</p>
+                        <br>
+                        <h4>Informasi Tambahan</h4>
+                        <p>Informasi tambahan seputar acara <b>{{ $x->judul }}</b></p>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td><i class="icon icon-calendar"></i>&nbsp;&nbsp;&nbsp;Harga Tiket</td>
+                                <td><b>Rp. {{number_format($x->harga_tiket , "2", ",", ".") }} / Tiket</b></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon icon-calendar"></i>&nbsp;&nbsp;&nbsp;Jumlah Tiket</td>
+                                <td><b>{{$x->jumlah_tiket }}</b></td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon icon-calendar"></i>&nbsp;&nbsp;&nbsp;Status Sponsorship</td>
+                                <td>@if($x->statusSponsor == 1) <font style="background-color: green; padding: 5px" color="white"> Open Sponsor </font> @else <font style="background-color: red; padding: 5px" color="white"> Tidak Open Sponsor </font> @endif</td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon icon-calendar"></i>&nbsp;&nbsp;&nbsp;Status Media Partnership</td>
+                                <td>@if($x->statusMediaPartner == 1) <font style="background-color: green; padding: 5px" color="white"> Open Media Partnership </font> @else <font style="background-color: red; padding: 5px" color="white"> Tidak Open Media Partnership</font> @endif</td>
+                            </tr>
+                            <tr>
+                                <td><i class="icon icon-calendar"></i>&nbsp;&nbsp;&nbsp;Status Open Booth</td>
+                                <td>@if($x->statusOpenBooth == 1) <font style="background-color: green; padding: 5px" color="white"> Open Booth </font> @else <font style="background-color: red; padding: 5px" color="white"> Tidak Open Booth </font> @endif</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                        @if(count($countpesan) > 0)
+                            @if(\Illuminate\Support\Facades\Session::get('tipe') != 1 OR \Illuminate\Support\Facades\Session::get('tipe') != 2)
+                                <hr>
+                                <p>*<b> Tertarik untuk kerjasama? Kirimkan pesan!</b></p>
+                                <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCompose">Kirim Pesan</button>
+                            @endif
+                        @else
+                            <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara.</div>
+                        @endif
 
                     </div>
                     <!--end blog-item-inner -->
 
 
 
-                    <h4>2 Comments</h4>
+                    <h4> Jumlah Review : {{ $countdata }}</h4>
 
                     @foreach($review as $reviews)
                     <!--begin comments_box -->
@@ -53,11 +93,9 @@
                             @foreach(\App\modelUser::where('id',$reviews->user_id)->get() as $users)
                             <h5> {{ $users->nama }}</h5>
                             @endforeach
-                            <ul class="post_info">
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                            </ul>
+                            @php Carbon\Carbon::setLocale('id') @endphp
+                            <p style="font-size: 11px">{{   \Carbon\Carbon::createFromTimeStamp(strtotime($reviews->created_at))->diffForHumans() }}</p>
+                            {{--<ul class="post_info"></ul>--}}
                             <p>{{ $reviews->pesan }}</p>
                         </div>
                         <!--end post_text -->
@@ -66,45 +104,48 @@
                     @endforeach
 
 
+                    @if(count($review_user) <= 0)
+                        <h4 class="padding-top-30">Hi, {{ \Illuminate\Support\Facades\Session::get('name') }}, tertarik untuk memberikan review? Bagaimana {{ $x->judul }} menurut kamu!</h4>
 
+                        {{--<p>Pellentesque mattis quam non ullamcorper semper, risus vels tortor etim iacus pharetra. Nullam tellus arcu, moldis vels nibh ut, gravida moldis ipse. Prod sed pharetra nunc. Quisque ornare luctis augue vel facilisis etims mattis.</p>--}}
 
-                    <h4 class="padding-top-30">Hi, {{ \Illuminate\Support\Facades\Session::get('name') }}, tertarik untuk memberikan review? Bagaimana {{ $x->judul }} menurut kamu!</h4>
+                        <!--begin comments_form -->
+                        <form class="comments_form" action="/reviewPost/{{base64_encode($x->id)}}" method="post">
+                            {{ csrf_field() }}
+                            <textarea name="message" placeholder="Your Message..." rows="2" cols="20" class="comments_text white-input"></textarea>
+                            <input type="submit" value="Submit" id="submit-button" class="comments-submit" />
+                        </form>
+                        <!--end comments_form -->
+                    @else
+                        <div class="alert alert-success">Terimakasih telah mereview acara <b>{{ $x->judul }}</b></div>
+                    @endif
 
-                    {{--<p>Pellentesque mattis quam non ullamcorper semper, risus vels tortor etim iacus pharetra. Nullam tellus arcu, moldis vels nibh ut, gravida moldis ipse. Prod sed pharetra nunc. Quisque ornare luctis augue vel facilisis etims mattis.</p>--}}
-
-                    <!--begin comments_form -->
-                    <form class="comments_form" action="/reviewPost/{{base64_encode($x->id)}}" method="post">
-                        {{ csrf_field() }}
-                        <textarea name="message" placeholder="Your Message..." rows="2" cols="20" class="comments_text white-input"></textarea>
-                        <input type="submit" value="Submit" id="submit-button" class="comments-submit" />
-                    </form>
-                    <!--end comments_form -->
                     @endforeach
                 </div>
 
             </div>
-            <!--end col-sm-8-->
-
             <!--begin col-sm-4 -->
             <div class="col-sm-4 margin-top-20">
 
                 <!--begin recent_posts -->
-                <h5>Recent Posts</h5>
-                <div class="sidebar_posts">
-                    <a href="#" title=""><img src="/frontend/images/footer1.jpg" alt=""></a>
-                    <a href="#" title="">Eodem modo typi, quisty et nunc nobis videntur parum clarits, it magna...</a>
-                    <span class="sidebar_post_date">21 July 2017</span>
-                </div>
-                <div class="sidebar_posts">
-                    <a href="#" title=""><img src="/frontend/images/footer2.jpg" alt=""></a>
-                    <a href="#" title="">Eodem modo typi, quisty et nunc nobis videntur parum clarits, it magna...</a>
-                    <span class="sidebar_post_date">17 September 2017</span>
-                </div>
-                <div class="sidebar_posts last">
-                    <a href="#" title=""><img src="/frontend/images/footer3.jpg" alt=""></a>
-                    <a href="#" title="">Eodem modo typi, quisty et nunc nobis videntur parum clarits, it magna...</a>
-                    <span class="sidebar_post_date">27 October 2017</span>
-                </div>
+                <h5>Acara Terbaru</h5>
+                @foreach($recent as $recents)
+                    <div class="sidebar_posts">
+                        <a href="#" title=""><img src="/frontend/images/footer1.jpg" alt=""></a>
+                        <a href="/acara/{{base64_encode($x->id)}}" title="">{{ $recents->judul }}</a>
+                        <span class="sidebar_post_date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($recents->created_at))->diffForHumans() }}</span>
+                    </div>
+                @endforeach
+                {{--<div class="sidebar_posts">--}}
+                    {{--<a href="#" title=""><img src="/frontend/images/footer2.jpg" alt=""></a>--}}
+                    {{--<a href="#" title="">Eodem modo typi, quisty et nunc nobis videntur parum clarits, it magna...</a>--}}
+                    {{--<span class="sidebar_post_date">17 September 2017</span>--}}
+                {{--</div>--}}
+                {{--<div class="sidebar_posts last">--}}
+                    {{--<a href="#" title=""><img src="/frontend/images/footer3.jpg" alt=""></a>--}}
+                    {{--<a href="#" title="">Eodem modo typi, quisty et nunc nobis videntur parum clarits, it magna...</a>--}}
+                    {{--<span class="sidebar_post_date">27 October 2017</span>--}}
+                {{--</div>--}}
                 <!--begin recent_posts -->
 
             </div>
@@ -114,7 +155,50 @@
         <!--end row-->
 
     </div>
-    <!--end container-->
+        <!--end container-->
+            <!--end col-sm-8-->
+
+
 
     </section>
+
+    <!-- /.modal compose message -->
+    <div class="modal fade" id="modalCompose">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Kirim Pesan</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" class="form-horizontal" action="/messagePost" method="post" enctype="multipart/form-data">
+                        @foreach($acaras as $acara)
+                        <div class="form-group">
+                            <label class="col-sm-2" for="inputTo">Kepada</label>
+                            <input type="hidden" name="idPenerima" class="form-control" value="{{ $acara->id }}">
+                            <div class="col-sm-10"><input disabled type="text" class="form-control" id="nameModal" placeholder="comma separated list of recipients" value="{{ $acara->judul }}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-12" for="inputBody">Pesan</label>
+                            <div class="col-sm-12"><textarea name="message" class="form-control" id="inputBody" rows="7" placeholder="Masukkan pesan kamu disini...." required=""></textarea></div>
+                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-12" for="inputBody">Lampiran</label>
+                                <div class="col-sm-12"><input type="file" class="form-control" id="inputSubject" placeholder="subject" name="file"></div>
+                            </div>
+
+                        @endforeach
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary ">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+                            </div>
+                    </form>
+
+                </div>
+
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal compose message -->
 @endsection

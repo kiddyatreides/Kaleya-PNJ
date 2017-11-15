@@ -16,12 +16,17 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('home','AcaraFrontendController@index');
     Route::get('acara/{id}','AcaraFrontendController@show');
     Route::post('reviewPost/{id}','AcaraFrontendController@store');
+    Route::post('messagePost','PesanController@messagePost');
 
     Route::get('logout','userController@logout');
 });
 
 Route::get('/', function () {
     return view('frontend.homepage.index');
+});
+
+Route::get('/pesan2', function () {
+    return view('frontend.user.pesan');
 });
 
 Route::get('login','userController@login');

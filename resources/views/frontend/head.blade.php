@@ -3,7 +3,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-<title>Marketer - SEO, Online Marketing, Social Media Template</title>
+<title>Kaleya | Kalender Budaya</title>
 
 <!-- LOAD JQUERY LIBRARY -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
