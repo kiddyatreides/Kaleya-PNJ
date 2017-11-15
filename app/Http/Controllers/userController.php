@@ -100,11 +100,12 @@ class userController extends Controller
         if(count($data) > 0){ //apakah email tersebut ada atau tidak
             if(Hash::check($password,$data->password)){
                 Session::put('id',$data->id);
-                Session::put('name',$data->name);
+                Session::put('name',$data->nama);
                 Session::put('email',$data->email);
                 Session::put('login',TRUE);
                 if($data->tipe == 1){ //berarti dia penyedia acara
-                    //input kode disini
+                    return redirect('acara/home');
+
                 }
                 else{
                     return redirect('home');

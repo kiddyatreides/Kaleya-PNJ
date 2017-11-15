@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
 });
+
+Route::get('acara/home','Acara\HomeController@index')->name('acara.home');
+
 Route::get('kaleya', function () {
     return view('kaleya.home');
 });

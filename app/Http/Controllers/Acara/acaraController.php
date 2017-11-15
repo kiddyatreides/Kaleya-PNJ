@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Acara;
 use App\Http\Controllers\Controller;
 use App\Model\acara;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class acaraController extends Controller
 {
@@ -37,6 +38,7 @@ class acaraController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $this -> validate($request, [
             'judul' => 'required',
             'deskripsi' => 'required',
@@ -78,9 +80,17 @@ class acaraController extends Controller
         //$acara ->user_id = 41; error child and parrent constraint
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
-        $acara -> save();
+        if($acara->save()){
+                return back()->with('alert-success','<script> window.onload = swal("Sukses!", "Berhasil Tambah Acara !", "success")</script>');
+            }
+            else{
+                return back()->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Coba Lagi!" ,  "error" )</script>');
+            }
 
-        return redirect(route('acara.index'));
+        }
+        catch (Exception $e){
+            return back()->with('alert-success',$e->getMessage());
+        }
     }
 
     /**
