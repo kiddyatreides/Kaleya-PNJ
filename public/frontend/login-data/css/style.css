@@ -252,7 +252,7 @@ i.twitter{
 .login-top input.password1 {
     background:#fff url(../images/2.png) no-repeat 4% 51%;
 }
-.login-top input[type="text"]:hover, ..login-top input[type="password"]:hover{
+.login-top input[type="text"]:hover, .login-top input[type="password"]:hover{
     border-bottom-color:rgba(132, 141, 215, 0.52);
 }
 .login-top.right input[type="text"],.login-top.right input[type="password"] {

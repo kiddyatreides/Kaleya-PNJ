@@ -12,14 +12,29 @@
 //Route::post('sendSms','smsController@store');
 //Route::post('sendSms2','smsController@sendSms');
 use Illuminate\Support\Facades\Route;
-Route::get('login','userController@login');
-Route::get('test','userController@test');
-Route::get('home','userController@index');
-Route::post('loginPost','userController@loginPost');
-Route::post('registerPost','userController@registerPost');
+Route::middleware(['checkLogin'])->group(function () {
+    Route::get('home','AcaraFrontendController@index');
+    Route::get('acara/{id}','AcaraFrontendController@show');
+    Route::post('reviewPost/{id}','AcaraFrontendController@store');
+
+    Route::get('logout','userController@logout');
+});
+
 Route::get('/', function () {
     return view('frontend.homepage.index');
 });
+
+Route::get('login','userController@login');
+Route::post('loginPost','userController@loginPost');
+Route::post('registerPost','userController@registerPost');
+
+Route::get('test','userController@test');
+
+
+//Route::get('/acarad', function () {
+//    return view('frontend.acara.show');
+//});
+
 Route::get('/dashboard', function () {
     return view('frontend.user.index');
 });

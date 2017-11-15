@@ -19,8 +19,11 @@
             <div class="col-xs-6 text-right">
 
                 <ol class="breadcrumb">
+                    <p class="active" style="color: red">Hello, {{ \Illuminate\Support\Facades\Session::get('name') }}</p>
+                    <hr>
                     <li><a href="index.html">Marketer</a></li>
                     <li class="active">Contact</li>
+
                 </ol>
 
             </div>

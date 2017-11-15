@@ -125,10 +125,14 @@
                         {{--<li><a tabindex="-1" href="blog-single.html">Blog Single</a></li>--}}
                     {{--</ul>--}}
                 {{--</li>--}}
+                @if(!\Illuminate\Support\Facades\Session::get('login'))
+                    <li><a href="contact-us.html">Contact</a></li>
 
-                <li><a href="contact-us.html">Contact</a></li>
+                    <li><a href="/login" class="purchase scrool">MASUK / DAFTAR</a></li>
+                @else
+                    <li><a href="/logout" class="purchase scrool">Logout</a></li>
+                @endif
 
-                <li><a href="#" class="purchase scrool">MASUK / DAFTAR</a></li>
 
                 <li class="dropdown hidden-nav-item"><a href="#" data-toggle="dropdown" class="dropdown-toggle">How to Reach Us</a>
                     <ul role="menu" class="dropdown-menu">
