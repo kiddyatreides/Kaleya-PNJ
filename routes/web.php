@@ -18,6 +18,8 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::post('reviewPost/{id}','AcaraFrontendController@store');
     Route::post('messagePost','PesanController@messagePost');
 
+	Route::get('kaleya/home','Acara\HomeController@index')->name('kaleya.home');
+    Route::resource('kaleya/acara','Acara\acaraController');
     Route::get('logout','userController@logout');
 });
 
@@ -51,6 +53,15 @@ Route::get('kaleya/acaras', function () {
 });
 Route::get('kaleya/addacara', function () {
     return view('kaleya.acara.addacara');
+});
+Route::get('listpesanacara', function () {
+    return view('kaleya.pesan.listpesan');
+});
+Route::get('pesanacara', function () {
+    return view('kaleya.pesan.pesan');
+});
+Route::get('addpesanacara', function () {
+    return view('kaleya.pesan.addpesan');
 });
 Route::resource('kaleya/acara','Acara\acaraController');
 //pesan controller
