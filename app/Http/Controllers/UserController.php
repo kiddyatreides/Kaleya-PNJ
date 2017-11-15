@@ -94,24 +94,6 @@ class userController extends Controller
     }
 
     public function loginPost(Request $request){
-<<<<<<< HEAD:app/Http/Controllers/userController.php
-        $email = $request->email;
-        $password = $request->password;
-
-        $data = ModelUser::where('email',$email)->first();
-        if(count($data) > 0){ //apakah email tersebut ada atau tidak
-            if(Hash::check($password,$data->password)){
-                Session::put('id',$data->id);
-                Session::put('name',$data->nama);
-                Session::put('email',$data->email);
-                Session::put('login',TRUE);
-                if($data->tipe == 1){ //berarti dia penyedia acara
-                    return redirect('acara/home');
-
-                }
-                else{
-                    return redirect('home');
-=======
         try {
 
 
@@ -126,13 +108,12 @@ class userController extends Controller
                     Session::put('email', $data->email);
                     Session::put('login', TRUE);
                     if ($data->tipe == 1) { //berarti dia penyedia acara
-                        //input kode disini
+                        return redirect('kaleya/home');
                     } else {
                         return redirect('home');
                     }
                 } else {
                     return redirect('login')->with('alert-success', '<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');
->>>>>>> d60611b832c85e4ae412d1123a1df03df840e608:app/Http/Controllers/UserController.php
                 }
             } else {
                 return redirect('login')->with('alert-success', '<script> window.onload = swal ( "Oops !" ,  "Password atau Email kamu Salah!" ,  "error" )</script>');

@@ -43,6 +43,7 @@
                                     <label for="Deskripsi">Deskripsi</label>
                                     <textarea class="form-control" rows="3" name="deskripsi" id="deskripsi" placeholder="Masukkan Deskripsi..."></textarea>
                                 </div>
+                                
                                 {{-- <div class="form-group">
                                     <label for="tanggal_mulai">Tanggal Mulai:</label>
 
@@ -78,55 +79,60 @@
                                 <label for="alamat">Alamat Acara</label>
                                 <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
                             </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <small>Open For:</small>
-                        <br>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input name="statusSponsor" type="checkbox" value="1"> Sponsor
-                                </label>
+                        </div>
+                        <div class="col-lg-6">
+                            <small>Open For:</small>
+                            <br>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="statusSponsor" type="checkbox" value="1"> Sponsor
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="statusMediaPartner" type="checkbox" value="1"> Media
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="statusOpenBooth" type="checkbox" value="1"> Booth
+                                    </label>
+                                </div>
                             </div>
                             <br>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="statusMediaPartner" type="checkbox" value="1"> Media
-                                </label>
+                            <div class="form-group">
+                                <label for="harga_tiket">Harga Tiket</label>
+                                <input type="text" class="form-control" id="harga_tiket" name="harga_tiket" placeholder="input harga">
                             </div>
-                            <br>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="statusOpenBooth" type="checkbox" value="1"> Booth
-                                </label>
+                            <div class="form-group">
+                                <label for="jumlah_tiket">Jumlah Tiket</label>
+                                <input type="text" class="form-control" id="jumlah_tiket" name="jumlah_tiket" placeholder="input jumlah">
+                            </div>
+                            <div class="form-group pull-left">
+                                <div class="pull-right">
+                                    <label for="foto">Upload Foto</label>
+                                    <input type="file" name="foto" id="foto">
+                                </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="harga_tiket">Harga Tiket</label>
-                            <input type="text" class="form-control" id="harga_tiket" name="harga_tiket" placeholder="input harga">
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a type="button" href="{{ route('acara.index') }}" class="btn btn-warning">Back</a>
                         </div>
-                        <div class="form-group">
-                            <label for="jumlah_tiket">Jumlah Tiket</label>
-                            <input type="text" class="form-control" id="jumlah_tiket" name="jumlah_tiket" placeholder="input jumlah">
-                        </div>
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a type="button" href="{{ route('acara.index') }}" class="btn btn-warning">Back</a>
-                </div>
-                <!-- /.box-body -->
+                        <!-- /.box-body -->
 
-            </form>
+                    </form>
 
+                </div>
+                <!-- /.col-->
+            </div>
         </div>
-        <!-- /.col-->
-    </div>
-</div>
-<!-- ./row -->
-</section>
-<!-- /.content -->
+        <!-- ./row -->
+    </section>
+    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 @endsection

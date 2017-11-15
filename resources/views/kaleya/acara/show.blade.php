@@ -49,6 +49,7 @@
                                         <th>Harga Tiket</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
+                                        <th>foto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,61 +62,63 @@
                                         <td>{{$acara ->tanggal_berakhir}}</td>
                                         <td>{{$acara ->jumlah_tiket}}</td>
                                         <td>{{$acara ->harga_tiket}}</td>
-                                        <td><a href="{{route('acara.edit',$acara ->id)}}"><span class="glyphicon glyphicon-edit"></span></a></td>
-                                        <td>
-                                            <form method="post" id="delete-form-{{$acara->id}}" action="{{route('acara.destroy',$acara ->id)}}" style="display: none">
-                                                {{csrf_field()}}
-                                                {{method_field('DELETE')}}
-                                            </form>
-                                            <a href="" onclick="
-                                            if(confirm('Are you sure?'))
-                                            {
-                                                event.preventDefault();document.getElementById('delete-form-{{$acara->id}}').submit();
-                                            }
-                                            else{
-                                                event.preventDefault();
-                                            }"><span class="glyphicon glyphicon-floppy-remove"></span></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>S.No</th>
-                                        <th>Judul</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
-                                        <th>Jumlah Tiket</th>
-                                        <th>Harga Tiket</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                            <td><a href="{{route('acara.edit',$acara ->id)}}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                                            <td>
+                                                <form method="post" id="delete-form-{{$acara->id}}" action="{{route('acara.destroy',$acara ->id)}}" style="display: none">
+                                                    {{csrf_field()}}
+                                                    {{method_field('DELETE')}}
+                                                </form>
+                                                <a href="" onclick="
+                                                if(confirm('Are you sure?'))
+                                                {
+                                                    event.preventDefault();document.getElementById('delete-form-{{$acara->id}}').submit();
+                                                }
+                                                else{
+                                                    event.preventDefault();
+                                                }"><span class="glyphicon glyphicon-floppy-remove"></span></a>
+                                            </td>
+                                            <td><img src="{{ url('uploads/foto/'.$acara->foto) }}" style="width: 120px; height: 120px;"> </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Judul</th>
+                                            <th>Tanggal Mulai</th>
+                                            <th>Tanggal Selesai</th>
+                                            <th>Jumlah Tiket</th>
+                                            <th>Harga Tiket</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                            <th>foto</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        Footer
+                    </div>
+                    <!-- /.box-footer-->
                 </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    Footer
-                </div>
-                <!-- /.box-footer-->
-            </div>
-            <!-- /.box -->
+                <!-- /.box -->
 
-        </section>
-        <!-- /.content -->
-    </div>
-    @endsection
-    @section('footerSection')
-    <!-- DataTables -->
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('acara/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
-    <script>
-        $(document).ready(function(){
-            $('#myTable').DataTable();
-        });
-    </script>
-    @endsection
+            </section>
+            <!-- /.content -->
+        </div>
+        @endsection
+        @section('footerSection')
+        <!-- DataTables -->
+        <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="{{asset('acara/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+        <script>
+            $(document).ready(function(){
+                $('#myTable').DataTable();
+            });
+        </script>
+        @endsection
 

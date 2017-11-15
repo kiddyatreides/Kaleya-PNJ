@@ -12,22 +12,26 @@
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
-
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
+        <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+            </a>
+          </li>
         <!-- Messages: style can be found in dropdown.less-->
         
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="hidden-xs">{{Session::get('name')}}
+            <span class="hidden-xs"> {{ \Illuminate\Support\Facades\Session::get('name') }}
             </span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <p>
-                {{Session::get('name')}}
+                 {{ \Illuminate\Support\Facades\Session::get('name') }} - KALEYA
                 <small>Member since Nov. 2012</small>
               </p>
             </li>
@@ -39,7 +43,7 @@
           <li class="user-footer">
             <div class="pull-right">
              {{--  @if(Auth::guest()) --}}
-             <a href="#">Logout</a>
+             <a href="/logout">Logout</a>
                         {{-- @else
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Acara;
 
 use App\Http\Controllers\Controller;
 use App\Model\acara;
+use App\User;
 use Illuminate\Http\Request;
-use Mockery\Exception;
+use Illuminate\Support\Facades\Session;
 
 class acaraController extends Controller
 {
@@ -17,6 +18,10 @@ class acaraController extends Controller
     public function index()
     {
         $acaras = acara::all();
+        $user = User::all();
+        $acara = [
+            'user' => $user
+        ];
         return view('kaleya.acara.show',compact('acaras'));
     }
 
@@ -38,7 +43,6 @@ class acaraController extends Controller
      */
     public function store(Request $request)
     {
-        try{
         $this -> validate($request, [
             'judul' => 'required',
             'deskripsi' => 'required',
@@ -51,8 +55,14 @@ class acaraController extends Controller
         $tanggal_mulai = date("Y-m-d");
         $tanggal_berakhir = date("Y-m-d");
         $acara = new acara;
+        $acara->user_id = Session::get('id');
         $acara ->judul = $request ->judul;
         $acara ->deskripsi = $request ->deskripsi;
+        $file = $request->file('foto');
+        $ext = $file->getClientOriginalExtension();
+        $newName = rand(100000,1001238912).".".$ext;
+        $file->move('uploads/foto',$newName);
+        $acara->foto = $newName;
         $acara ->tanggal_mulai = $request ->tanggal_mulai;
         $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
         $acara ->alamat = $request ->alamat;
@@ -81,15 +91,10 @@ class acaraController extends Controller
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
         if($acara->save()){
-                return back()->with('alert-success','<script> window.onload = swal("Sukses!", "Berhasil Tambah Acara !", "success")</script>');
-            }
-            else{
-                return back()->with('alert-success','<script> window.onload = swal ( "Oops !" ,  "Coba Lagi!" ,  "error" )</script>');
-            }
-
+            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Ditambahkan!!", "success")</script>');
         }
-        catch (Exception $e){
-            return back()->with('alert-success',$e->getMessage());
+        else{
+            return back()->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Menambahkan Acara!", "error")</script>');
         }
     }
 
@@ -139,6 +144,17 @@ class acaraController extends Controller
         $acara = acara::find($id);
         $acara ->judul = $request ->judul;
         $acara ->deskripsi = $request ->deskripsi;
+        if (empty($request->file('foto'))){
+            $acara->foto = $acara->foto;
+        }
+        else{
+            unlink('uploads/foto/'.$acara->foto); //menghapus file lama
+            $file = $request->file('foto');
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $file->move('uploads/foto',$newName);
+            $acara->foto = $newName;
+        }
         $acara ->tanggal_mulai = $request ->tanggal_mulai;
         $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
         $acara ->alamat = $request ->alamat;
@@ -165,9 +181,13 @@ class acaraController extends Controller
         $acara ->harga_tiket = $request ->harga_tiket;
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
-        $acara -> save();
-
-        return redirect(route('acara.index'));
+        if($acara->save()){
+            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Diedit!!", "success")</script>');
+        }
+        else{
+            return back()->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Edit Acara!", "error")</script>');
+        }
+        //return redirect(route('acara.index'));
     }
 
     /**
