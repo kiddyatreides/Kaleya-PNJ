@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\modelAcara;
+use App\modelPesan;
 use App\modelReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -66,9 +67,18 @@ class acaraFrontendController extends Controller
         $idasli = base64_decode($id);
         $acara = modelAcara::where('id',$idasli)->get();
         $review = modelReview::where('event_id',$idasli)->get();
+        $review_user = modelReview::where('event_id',$idasli)->where('user_id',Session::get('id'))->get();
+        $countdata = modelReview::where('event_id',$idasli)->count();
+        $countpesan = modelPesan::where('acara_id',$idasli)->where('pengirim_id', Session::get('id'))->count();
+        $recent = modelAcara::where('statusAcara', 1)->where('id', '!=' , $idasli)->orderBy('created_at', 'desc')->take(3)->get();
+
         $data = [
             'acaras' => $acara,
-            'review' => $review
+            'review' => $review,
+            'review_user' => $review_user,
+            'countdata' => $countdata,
+            'countpesan' => $countpesan,
+            'recent' => $recent
         ];
         if(count($data) > 0){
             return view('frontend.acara.show',$data);

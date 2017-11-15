@@ -106,6 +106,7 @@ class userController extends Controller
                     Session::put('id', $data->id);
                     Session::put('name', $data->nama);
                     Session::put('email', $data->email);
+                    Session::put('tipe', $data->tipe);
                     Session::put('login', TRUE);
                     if ($data->tipe == 1) { //berarti dia penyedia acara
                         return redirect('kaleya/home');

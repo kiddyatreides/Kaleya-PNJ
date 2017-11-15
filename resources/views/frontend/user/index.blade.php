@@ -1,7 +1,7 @@
 @extends('frontend.base')
 @section('content')
 
-    @include('frontend.user.menu')
+    @include('frontend.user.menu', ['menu' => 'Home' ])
 
     <section class="section-white small-padding">
 

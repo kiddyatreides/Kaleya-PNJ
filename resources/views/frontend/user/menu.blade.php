@@ -10,7 +10,7 @@
             <!--begin col-xs-6 -->
             <div class="col-xs-6">
 
-                <h2 class="page-title">Contact Us</h2>
+                <h2 class="page-title">{{ $menu }}</h2>
 
             </div>
             <!--end col-xs-6 -->

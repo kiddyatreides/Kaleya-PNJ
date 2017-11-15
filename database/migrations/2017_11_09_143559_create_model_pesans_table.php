@@ -15,10 +15,14 @@ class CreateModelPesansTable extends Migration
     {
         Schema::create('pesan', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('acara_id')->unsigned();
             $table->integer('pengirim_id')->unsigned();
             $table->integer('penerima_id')->unsigned();
             $table->text('pesan');
+            $table->text('lampiran')->nullable();
+            $table->text('url_lampiran')->nullable();
             $table->timestamps();
+            $table->foreign('acara_id')->references('id')->on('acara');
             $table->foreign('pengirim_id')->references('id')->on('users');
             $table->foreign('penerima_id')->references('id')->on('users');
         });
