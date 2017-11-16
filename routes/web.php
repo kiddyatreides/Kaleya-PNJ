@@ -17,11 +17,14 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('acara/{id}','AcaraFrontendController@show');
     Route::post('reviewPost/{id}','AcaraFrontendController@store');
     Route::post('messagePost','PesanController@messagePost');
-
+    Route::get('home/pesan_masuk','PesanController@inboxUser');
+    Route::get('home/pesan_keluar','PesanController@sentUser');
+    Route::get('pesan/detail/{id}','PesanController@getDetailMessage');
 	Route::get('kaleya/home','Acara\HomeController@index')->name('kaleya.home');
     Route::resource('kaleya/acara','Acara\acaraController');
     Route::get('logout','userController@logout');
 });
+
 
 Route::get('/', function () {
     return view('frontend.homepage.index');
@@ -31,10 +34,14 @@ Route::get('/pesan2', function () {
     return view('frontend.user.pesan');
 });
 
+Route::get('/detaill', function () {
+    return view('frontend.user.detail_pesan');
+});
+
 Route::get('login','userController@login');
 Route::post('loginPost','userController@loginPost');
 Route::post('registerPost','userController@registerPost');
-
+Route::get('getmessage','PesanController@getMessage');
 Route::get('test','userController@test');
 
 

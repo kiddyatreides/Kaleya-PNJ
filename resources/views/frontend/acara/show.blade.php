@@ -106,9 +106,7 @@
 
                     @if(count($review_user) <= 0)
                         <h4 class="padding-top-30">Hi, {{ \Illuminate\Support\Facades\Session::get('name') }}, tertarik untuk memberikan review? Bagaimana {{ $x->judul }} menurut kamu!</h4>
-
                         {{--<p>Pellentesque mattis quam non ullamcorper semper, risus vels tortor etim iacus pharetra. Nullam tellus arcu, moldis vels nibh ut, gravida moldis ipse. Prod sed pharetra nunc. Quisque ornare luctis augue vel facilisis etims mattis.</p>--}}
-
                         <!--begin comments_form -->
                         <form class="comments_form" action="/reviewPost/{{base64_encode($x->id)}}" method="post">
                             {{ csrf_field() }}
@@ -155,11 +153,6 @@
         <!--end row-->
 
     </div>
-        <!--end container-->
-            <!--end col-sm-8-->
-
-
-
     </section>
 
     <!-- /.modal compose message -->
@@ -175,7 +168,8 @@
                         @foreach($acaras as $acara)
                         <div class="form-group">
                             <label class="col-sm-2" for="inputTo">Kepada</label>
-                            <input type="hidden" name="idPenerima" class="form-control" value="{{ $acara->id }}">
+                            <input type="hidden" name="idAcara" class="form-control" value="{{ $acara->id }}">
+                            <input type="hidden" name="idPenerima" class="form-control" value="{{ $acara->user_id }}">
                             <div class="col-sm-10"><input disabled type="text" class="form-control" id="nameModal" placeholder="comma separated list of recipients" value="{{ $acara->judul }}"></div>
                         </div>
                         <div class="form-group">
@@ -184,9 +178,8 @@
                         </div>
                             <div class="form-group">
                                 <label class="col-sm-12" for="inputBody">Lampiran</label>
-                                <div class="col-sm-12"><input type="file" class="form-control" id="inputSubject" placeholder="subject" name="file"></div>
+                                <div class="col-sm-12"><input type="file" class="form-control" id="inputSubject" placeholder="subject" name="lampiran"></div>
                             </div>
-
                         @endforeach
 
                             <div class="modal-footer">

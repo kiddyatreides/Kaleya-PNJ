@@ -110,6 +110,7 @@
             </section>
             <!-- /.content -->
         </div>
+
         @endsection
         @section('footerSection')
         <!-- DataTables -->

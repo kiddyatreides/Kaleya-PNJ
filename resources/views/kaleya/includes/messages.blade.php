@@ -1,3 +1,3 @@
-@if(\Illuminate\Support\Facades\Session::has('alert-success'))
-    {!! \Illuminate\Support\Facades\Session::get('alert-success') !!}
+@if(\Illuminate\Support\Facades\Session::has('sweet-alert'))
+    {!! \Illuminate\Support\Facades\Session::get('sweet-alert') !!}
 @endif

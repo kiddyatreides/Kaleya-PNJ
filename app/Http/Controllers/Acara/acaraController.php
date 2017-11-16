@@ -63,6 +63,8 @@ class acaraController extends Controller
         $newName = rand(100000,1001238912).".".$ext;
         $file->move('uploads/foto',$newName);
         $acara->foto = $newName;
+        $urlfoto = url('uploads/foto/').$newName;
+        $acara->urlfoto = $urlfoto;
         $acara ->tanggal_mulai = $request ->tanggal_mulai;
         $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
         $acara ->alamat = $request ->alamat;
