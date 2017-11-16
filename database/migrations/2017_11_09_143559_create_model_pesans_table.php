@@ -15,7 +15,7 @@ class CreateModelPesansTable extends Migration
     {
         Schema::create('pesan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode');
+            $table->string('kode',220);
             $table->integer('acara_id')->unsigned();
             $table->integer('pengirim_id')->unsigned();
             $table->integer('penerima_id')->unsigned();
