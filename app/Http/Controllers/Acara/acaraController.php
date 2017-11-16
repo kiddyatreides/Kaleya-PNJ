@@ -61,7 +61,7 @@ class acaraController extends Controller
         $file = $request->file('foto');
         $ext = $file->getClientOriginalExtension();
         $newName = rand(100000,1001238912).".".$ext;
-        $file->move('uploads/foto',$newName);
+        $file->move('uploads/foto/',$newName);
         $acara->foto = $newName;
         $urlfoto = url('uploads/foto/').$newName;
         $acara->urlfoto = $urlfoto;
