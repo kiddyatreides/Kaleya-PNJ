@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\modelPesan;
+use App\modelPesanHeader;
 use App\modelUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,30 +23,12 @@ class PesanController extends Controller
     	return $request->all();
     }
 
-    public function getDetailMessage($id){
+    public function getDetailMessage($kode){
         try{
-            $real_id = base64_decode($id);
-
-            $getPesan = modelPesan::where('id',$real_id)->get();
-
-            foreach ($getPesan as $datas){
-                $pengirim = $datas->pengirim_id;
-                $penerima = $datas->penerima_id;
-                $acara = $datas->acara_id;
-            }
-
-            $pesanDetail = modelPesan::where('acara_id',$acara)
-                ->orWhere('penerima_id',$penerima)
-                ->orWhere('pengirim_id',$pengirim)
-                ->orderBy('created_at', 'asc')
-                ->get();
-
-
+            $getPesan = modelPesan::where('kode',$kode)->orderBy('created_at','desc')->get();
             $data = [
-              'pesan' => $pesanDetail,
-              'modalpesan' => $getPesan,
+              'modalpesan' => $getPesan
             ];
-
             return view('frontend.user.detail_pesan',$data);
         }
         catch (Exception $exception){
@@ -77,9 +60,9 @@ class PesanController extends Controller
     public function sentUser(){
         try{
             $pesan = DB::table('pesan')
-                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at')
+                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at','kode')
                 ->where('pengirim_id', Session::get('id'))
-                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at')
+                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at','kode')
                 ->orderBy('created_at','desc')
                 ->limit(1)
                 ->get();
@@ -97,10 +80,53 @@ class PesanController extends Controller
 
     public function messagePost(Request $request){
         try{
+            $header = new modelPesanHeader();
+            $kode = rand(123000,560000);
+            $header->kode = $kode;
+
+            if($header->save()){
+                $data = new modelPesan();
+                $data->acara_id = $request->idAcara;
+                $data->pengirim_id = Session::get('id');
+                $data->penerima_id = $request->idPenerima;
+                $data->pesan = $request->message;
+                $file = $request->file('lampiran');
+                if(!empty($file)){
+                    $ext = $file->getClientOriginalExtension();
+                    $name = time().'.'.$ext;
+                    $file->move('uploads/acara',$name);
+                    $data->lampiran = $name;
+                    $data->url_lampiran = url('uploads/acara/').$name;
+                }
+                else{
+                    $data->lampiran = null;
+                    $data->url_lampiran = null;
+                }
+
+
+                if($data->save()){
+                    return back()->with('sweet-alert','<script> window.onload = swal ( "Sukses" ,  "Kamu berhasil mengirimkan pesan!" ,  "success" )</script>');
+                }
+                else{
+                    return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Pengiriman pesan gagal!" ,  "error" )</script>');
+                }
+            }
+            else{
+
+            }
+        }
+        catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function messageReply(Request $request){
+        try{
             $data = new modelPesan();
             $data->acara_id = $request->idAcara;
             $data->pengirim_id = Session::get('id');
             $data->penerima_id = $request->idPenerima;
+            $data->kode = $request->kode;
             $data->pesan = $request->message;
             $file = $request->file('lampiran');
             if(!empty($file)){

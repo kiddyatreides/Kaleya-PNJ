@@ -28,7 +28,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Tambah Acara</h3>
                     </div>
-                    @include('kaleya.includes.messages')
+
                     <!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" action="{{ route('acara.store') }}" method="post" enctype="multipart/form-data">

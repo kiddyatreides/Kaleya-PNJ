@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Acara;
 
 use App\Http\Controllers\Controller;
 use App\Model\acara;
+use App\modelAcara;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -17,11 +18,8 @@ class acaraController extends Controller
      */
     public function index()
     {
-        $acaras = acara::all();
-        $user = User::all();
-        $acara = [
-            'user' => $user
-        ];
+        $acaras = modelAcara::where('user_id',Session::get('id'))->get();
+
         return view('kaleya.acara.show',compact('acaras'));
     }
 
@@ -59,12 +57,18 @@ class acaraController extends Controller
         $acara ->judul = $request ->judul;
         $acara ->deskripsi = $request ->deskripsi;
         $file = $request->file('foto');
-        $ext = $file->getClientOriginalExtension();
-        $newName = rand(100000,1001238912).".".$ext;
-        $file->move('uploads/foto/',$newName);
-        $acara->foto = $newName;
-        $urlfoto = url('uploads/foto/').$newName;
-        $acara->urlfoto = $urlfoto;
+        if(empty($file)){
+            $acara->urlfoto = null;
+            $acara->foto = null;
+        }
+        else{
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000,1001238912).".".$ext;
+            $file->move('uploads/foto/',$newName);
+            $acara->foto = $newName;
+            $urlfoto = url('uploads/foto/').$newName;
+            $acara->urlfoto = $urlfoto;
+        }
         $acara ->tanggal_mulai = $request ->tanggal_mulai;
         $acara ->tanggal_berakhir = $request ->tanggal_berakhir;
         $acara ->alamat = $request ->alamat;
@@ -93,10 +97,10 @@ class acaraController extends Controller
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
         if($acara->save()){
-            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Ditambahkan!!", "success")</script>');
+            return redirect()->route('acara.index')->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Ditambahkan!!", "success")</script>');
         }
         else{
-            return back()->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Menambahkan Acara!", "error")</script>');
+            return redirect()->route('acara.index')->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Menambahkan Acara!", "error")</script>');
         }
     }
 
@@ -184,10 +188,10 @@ class acaraController extends Controller
         $acara ->jumlah_tiket = $request ->jumlah_tiket;
 
         if($acara->save()){
-            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Diedit!!", "success")</script>');
+            return redirect()->route('acara.index')->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Diedit!!", "success")</script>');
         }
         else{
-            return back()->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Edit Acara!", "error")</script>');
+            return redirect()->route('acara.index')->with('sweet-alert','<script> window.onload = swal("Oops!", "Gagal Edit Acara!", "error")</script>');
         }
         //return redirect(route('acara.index'));
     }
@@ -201,6 +205,6 @@ class acaraController extends Controller
     public function destroy($id)
     {
          acara::where('id',$id) ->delete();
-        return redirect()->back();
+        return redirect()->route('acara.index')->with('sweet-alert','<script> window.onload = swal("Sukses!", "Acara Telah Dihapus!!", "success")</script>');
     }
 }

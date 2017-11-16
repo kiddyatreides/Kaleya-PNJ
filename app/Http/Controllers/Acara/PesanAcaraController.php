@@ -14,7 +14,25 @@ class PesanAcaraController extends Controller
 {
     public function index()
     {
-    	return view('kaleya.pesan.listpesan');
+        try{
+            $pesan = DB::table('pesan')
+                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at','kode')
+                ->where('penerima_id', Session::get('id'))
+                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at','kode')
+                ->orderBy('created_at','desc')
+                ->limit(1)
+                ->get();
+
+            $data = [
+                'pesan' => $pesan
+            ];
+            return view('kaleya.pesan.listpesan', $data);
+
+        }
+        catch(Exception $e){
+            return response($e->getMessage());
+        }
+
     }
 
     public function create(request $request)
@@ -22,108 +40,94 @@ class PesanAcaraController extends Controller
     	return $request->all();
     }
 
-    public function getDetailMessage($id){
+    public function show($id){
         try{
-            $real_id = base64_decode($id);
-
-            $getPesan = modelPesan::where('id',$real_id)->get();
-
-            foreach ($getPesan as $datas){
-                $pengirim = $datas->pengirim_id;
-                $penerima = $datas->penerima_id;
-                $acara = $datas->acara_id;
+            try{
+                $getPesan = modelPesan::where('kode',$id)->orderBy('created_at','desc')->get();
+                $data = [
+                    'modalpesan' => $getPesan
+                ];
+                return view('kaleya.pesan.pesan',$data);
             }
-
-            $pesanDetail = modelPesan::where('acara_id',$acara)
-                ->orWhere('penerima_id',$penerima)
-                ->orWhere('pengirim_id',$pengirim)
-                ->orderBy('created_at', 'asc')
-                ->get();
-
-
-            $data = [
-              'pesan' => $pesanDetail,
-              'modalpesan' => $getPesan,
-            ];
-
-            return view('kaleya.pesan.pesan',$data);
+            catch (Exception $exception){
+                return response($exception->getMessage());
+            }
         }
         catch (Exception $exception){
-            return response($exception->getMessage());
-        }
-    }
-
-    public function inboxUser(){
-        try{
-            $pesan = DB::table('pesan')
-                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at')
-                ->where('penerima_id', Session::get('id'))
-                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at')
-                ->orderBy('created_at','desc')
-                ->limit(1)
-                ->get();
-
-            $data = [
-                'pesan' => $pesan
-            ];
-            return view('kaleya.pesan.addpesan', $data);
-
-        }
-        catch(Exception $e){
-            return response($e->getMessage());
-        }
-    }
-
-    public function sentUser(){
-        try{
-            $pesan = DB::table('pesan')
-                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at')
-                ->where('pengirim_id', Session::get('id'))
-                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at')
-                ->orderBy('created_at','desc')
-                ->limit(1)
-                ->get();
-
-            $data = [
-                'pesan' => $pesan
-            ];
-            return view('kaleya.acara.listpesan', $data);
-
-        }
-        catch(Exception $e){
-            return response($e->getMessage());
+            print_r($exception->getMessage());
         }
     }
 
     public function messagePost(Request $request){
         try{
+            $header = new modelPesanHeader();
+            $kode = rand(123000,560000);
+            $header->kode = $kode;
+
+            if($header->save()){
+                $data = new modelPesan();
+                $data->acara_id = $request->idAcara;
+                $data->pengirim_id = Session::get('id');
+                $data->penerima_id = $request->idPenerima;
+                $data->pesan = $request->message;
+                $file = $request->file('lampiran');
+                if(!empty($file)){
+                    $ext = $file->getClientOriginalExtension();
+                    $name = time().'.'.$ext;
+                    $file->move('uploads/acara',$name);
+                    $data->lampiran = $name;
+                    $data->url_lampiran = url('uploads/acara/').$name;
+                }
+                else{
+                    $data->lampiran = null;
+                    $data->url_lampiran = null;
+                }
+
+
+                if($data->save()){
+                    return back()->with('sweet-alert','<script> window.onload = swal ( "Sukses" ,  "Kamu berhasil mengirimkan pesan!" ,  "success" )</script>');
+                }
+                else{
+                    return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Pengiriman pesan gagal!" ,  "error" )</script>');
+                }
+            }
+            else{
+
+            }
+        }
+        catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function messageReply(Request $request)
+    {
+        try {
             $data = new modelPesan();
             $data->acara_id = $request->idAcara;
             $data->pengirim_id = Session::get('id');
             $data->penerima_id = $request->idPenerima;
+            $data->kode = $request->kode;
             $data->pesan = $request->message;
             $file = $request->file('lampiran');
-            if(!empty($file)){
+            if (!empty($file)) {
                 $ext = $file->getClientOriginalExtension();
-                $name = time().'.'.$ext;
-                $file->move('uploads/acara/',$name);
+                $name = time() . '.' . $ext;
+                $file->move('uploads/acara', $name);
                 $data->lampiran = $name;
-                $data->url_lampiran = url('uploads/acara/').$name;
-            }
-            else{
+                $data->url_lampiran = url('uploads/acara/') . $name;
+            } else {
                 $data->lampiran = null;
                 $data->url_lampiran = null;
             }
 
 
-            if($data->save()){
-                return back()->with('sweet-alert','<script> window.onload = swal ( "Sukses" ,  "Kamu berhasil mengirimkan pesan!" ,  "success" )</script>');
+            if ($data->save()) {
+                return back()->with('sweet-alert', '<script> window.onload = swal ( "Sukses" ,  "Kamu berhasil mengirimkan pesan!" ,  "success" )</script>');
+            } else {
+                return back()->with('sweet-alert', '<script> window.onload = swal ( "Oops !" ,  "Pengiriman pesan gagal!" ,  "error" )</script>');
             }
-            else{
-                return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Pengiriman pesan gagal!" ,  "error" )</script>');
-            }
-        }
-        catch (Exception $e){
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
