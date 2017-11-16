@@ -44,7 +44,11 @@
 						<!-- /.box-header -->
 						@foreach($modalpesan as $pesans)
 						<div class="col-md-12">
-							<div class="box box-primary">
+							@if($pesans->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+								<div class="box box-primary">
+							@else
+								<div class="box box-primary" style="background-color: #5e5e55">
+							@endif
 
 								<!-- /.box-header -->
 								<div class="box-body no-padding">
@@ -53,19 +57,25 @@
 											@if($pesans->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
 												<h5>{{ $users->nama }}
 											@else
-												<h5>You <font style="font-size: 12px;">({{ $users->nama }})</font>
+												<h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font>
 											@endif
 											@endforeach
-													<span class="mailbox-read-time pull-right">{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</span></h5>
+													<span class="mailbox-read-time pull-right" style="color: white">{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</span></h5>
 										</div>
 										<!-- /.mailbox-read-info -->
 														<!-- /.mailbox-controls -->
-														<div class="mailbox-read-message">
-															<p>{{ $pesans->pesan }}</p>
+														@if($pesans->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+															<div class="mailbox-read-message">
+																<p>{{ $pesans->pesan }}</p>
+																{{--<p>Thanks,<br>Jane</p>--}}
+															</div>
+														@else
+															<div class="mailbox-read-message">
+																<p style="color: white;">{{ $pesans->pesan }}</p>
+																{{--<p>Thanks,<br>Jane</p>--}}
+															</div>
+														@endif
 
-
-															{{--<p>Thanks,<br>Jane</p>--}}
-														</div>
 														<!-- /.mailbox-read-message -->
 													</div>
 													<!-- /.box-body -->
