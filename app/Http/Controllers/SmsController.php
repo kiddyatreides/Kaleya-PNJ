@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
+use Twilio\Rest\Client;
 
 class smsController extends Controller
 {
@@ -23,7 +24,7 @@ class smsController extends Controller
             $pesan = "Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara. \n \n";
 
             $message = $client->message()->send([
-                'to' => $to,
+                'to' => "+6282213308462",
                 'from' => 'Kaleya',
                 'text' => $pesan
             ]);
@@ -38,6 +39,50 @@ class smsController extends Controller
         catch (Exception $e){
             return response($e->getMessage());
         }
+    }
+
+    public function sentSMS(){
+        $client = new \GuzzleHttp\Client();
+        $message  = $client->request('POST', 'https://api.mainapi.net/smsnotification/1.0.0/messages', [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type'     => 'application/x-www-form-urlencoded',
+                'Authorization' => 'Bearer 8e9dfdfd04c9519ad09deca43c30b8c3'
+            ],
+            'form_params' => array(
+                'msisdn' => Session::get('nohp'),
+                'content' => 'Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara.',
+            )
+        ]);
+
+        if($message){
+            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Berhasil Daftar !", "success")</script>');
+        }
+        else{
+            return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Gagal Daftar!" ,  "error" )</script>');
+        }
+    }
+
+    public function twillioSMS(){
+        // Use the REST API Client to make requests to the Twilio REST API
+
+
+        // Your Account SID and Auth Token from twilio.com/console
+        $sid = 'AC230f977dae927fcb291c33c44585584d';
+        $token = 'a7f8831113dceed368254c6444f00fc4';
+        $client = new Client($sid, $token);
+
+        // Use the client to do fun stuff like send text messages!
+        $client->messages->create(
+        // the number you'd like to send the message to
+            '+6282213308462',
+            array(
+                // A Twilio phone number you purchased at twilio.com/console
+                'from' => '+18312186296 ',
+                // the body of the text message you'd like to send
+                'body' => 'Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara.'
+            )
+        );
     }
 
 }

@@ -77,6 +77,13 @@
                             <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara. <br><a href="/home/pesan_masuk">Klik disini untuk melihat pesan masuk</a> </div>
                         @endif
 
+
+                            @if(\Illuminate\Support\Facades\Session::get('tipe') != 1)
+                                <hr>
+                                <p>*<b> Ingin diingatkan mengenai acara diatas?</b></p>
+                                <a class="btn btn-primary btn-md" href="/twillioSMS">Ingatkan Saya</a>
+                            @endif
+
                     </div>
                     <!--end blog-item-inner -->
 
@@ -87,7 +94,7 @@
                     @foreach($review as $reviews)
                     <!--begin comments_box -->
                     <div class="comments_box">
-                        <img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">
+                        <img src="/frontend/images/icon/icon-reviewer.jpg" alt="Picture" class="comments_pic">
                         <!--begin post_text -->
                         <div class="post_text">
                             @foreach(\App\modelUser::where('id',$reviews->user_id)->get() as $users)
