@@ -46,7 +46,7 @@ class PesanAcaraController extends Controller
               'modalpesan' => $getPesan,
             ];
 
-            return view('kaleya.pesan.pesan',$data);
+            return view('#',$data);
         }
         catch (Exception $exception){
             return response($exception->getMessage());
@@ -66,7 +66,7 @@ class PesanAcaraController extends Controller
             $data = [
                 'pesan' => $pesan
             ];
-            return view('kaleya.pesan.addpesan', $data);
+            return view('#', $data);
 
         }
         catch(Exception $e){
@@ -87,7 +87,7 @@ class PesanAcaraController extends Controller
             $data = [
                 'pesan' => $pesan
             ];
-            return view('kaleya.acara.listpesan', $data);
+            return view('#', $data);
 
         }
         catch(Exception $e){
