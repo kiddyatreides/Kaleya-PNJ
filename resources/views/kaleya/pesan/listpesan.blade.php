@@ -45,44 +45,35 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Inbox</h3>
-
-              <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-              </div>
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                   <tbody>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
-                  </tr>
+                  @if(count($pesan) < 1)
+                    <tr>
+                      <td class="mailbox-name"><p style="color: blue"></p></td>
+                      <td class="mailbox-subject"><center><b></b> No Messages</center>
+                      </td>
+                      <td class="mailbox-attachment"></td>
+                      <td class="mailbox-date"></td>
+                    </tr>
+                  @else
+                    @foreach($pesan as $pesans)
+                    <tr>
+                      @foreach(\App\modelUser::where('id',$pesans->pengirim_id)->get() as $user)
+                      <td class="mailbox-name"><p style="color: blue">{{ $user->nama }}</p></td>
+                      @endforeach
+                      <td class="mailbox-subject"><a href="{{route('pesan.show', $pesans->kode) }}"> @foreach(\App\modelAcara::where('id',$pesans->acara_id)->get() as $acara) <b>{{ $acara->judul }}</b> @endforeach - {{ substr($pesans->pesan,0,30) }} [...]</a>
+                      </td>
+                      <td class="mailbox-attachment"></td>
+                      @php Carbon\Carbon::setLocale('id') @endphp
+                      <td class="mailbox-date">{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</td>
+                    </tr>
+                    @endforeach
+                  @endif
                   </tbody>
                 </table>
                 <!-- /.table -->
@@ -90,25 +81,6 @@
               <!-- /.mail-box-messages -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <div class="mailbox-controls">
-                </button>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
-            </div>
           </div>
           <!-- /. box -->
         </div>

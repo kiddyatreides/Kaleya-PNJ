@@ -42,7 +42,7 @@
                                     </a>
                                 @else
                                     @foreach($pesan as $pesans)
-                                        <a href="/pesan/detail/{{ base64_encode($pesans->id) }}" class="list-group-item">
+                                        <a href="/pesan/detail/{{ $pesans->kode }}" class="list-group-item">
                                             @foreach(\App\modelUser::where('id',$pesans->penerima_id)->get() as $user)
                                                 <span class="name" style="min-width: 120px; display: inline-block;">{{ $user->nama }}</span>
                                             @endforeach

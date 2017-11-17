@@ -6,6 +6,7 @@
 </head>
 <body class="hold-transition- skin-black sidebar-mini ">
 <div class="wrapper">
+@include('kaleya.includes.messages')
 @include('kaleya/layouts/header')
     @section('main-content')
         @show

@@ -34,80 +34,43 @@
                             <div class="list-group">
                                 <h3>Detail Pesan - <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCompose">Balas</button></h3>
 
-                                @foreach($pesan as $x)
+                                @foreach($modalpesan as $x)
 
                                         <!--begin comments_box -->
+                                                <input type="hidden" id="idPenerima" value="{{ $x->penerima_id }}" />
+                                                <input type="hidden" id="idPengirim" value="{{ $x->pengirim_id }}" />
+                                                <input type="hidden" id="idAcara" value="{{ $x->acara_id }}">
+                                                <input type="hidden" id="kode" value="{{ $x->kode }}" />
 
                                                 <div class="comments_box">
                                                 <img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">
                                                 <!--begin post_text -->
-                                                @if($x->penerima_id != \Illuminate\Support\Facades\Session::get('id'))
+                                                    @if($x->penerima_id != \Illuminate\Support\Facades\Session::get('id'))
                                                         <div class="post_text" style="background-color: grey!important">
-                                                            @foreach(\App\modelUser::where('id',$x->pengirim_id)->get() as $users)
-                                                                @if($users->id != \Illuminate\Support\Facades\Session::get('id'))
-                                                                    <h5 style="color: white"> {{ $users->nama }}</h5>
-                                                                @else
-                                                                    <h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font></h5>
-                                                                @endif
-                                                            @endforeach
-                                                            <p style="font-size: 11px; color: white">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
-                                                            {{--<ul class="post_info"></ul>--}}
-                                                            <p style="color: white">{{ $x->pesan }}</p>
-                                                        </div>
-                                                @else
+                                                    @else
                                                         <div class="post_text">
-                                                            @foreach(\App\modelUser::where('id',$x->pengirim_id)->get() as $users)
-                                                                @if($users->id != \Illuminate\Support\Facades\Session::get('id'))
-                                                                    <h5> {{ $users->nama }}</h5>
-                                                                @else
-                                                                    <h5>You <font style="font-size: 12px;">({{ $users->nama }})</font></h5>
-                                                                @endif
-                                                            @endforeach
-                                                            <p style="font-size: 11px">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
-                                                            {{--<ul class="post_info"></ul>--}}
-                                                            <p>{{ $x->pesan }}</p>
-                                                        </div>
-                                                @endif
+                                                    @endif
+                                                        @foreach(\App\modelUser::where('id',$x->pengirim_id)->get() as $users)
+                                                            @if($x->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+                                                                <h5 style="color: black">{{ $users->nama }}</h5>
+                                                                    <input type="hidden" id="namaUser" value="{{ $users->nama }}" />
+                                                                    <p style="font-size: 11px; color: black">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
+                                                                    {{--<ul class="post_info"></ul>--}}
+                                                                    <p style="color: black">{{ $x->pesan }}</p>
+                                                            @else
+                                                                <h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font></h5>
+                                                                <p style="font-size: 11px; color: white">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
+                                                                {{--<ul class="post_info"></ul>--}}
+                                                                <p style="color: white">{{ $x->pesan }}</p>
+                                                            @endif
+                                                        @endforeach
 
+                                                    </div>
                                                 <!--end post_text -->
                                             </div>
                                             <!--end comments_box -->
 
                                 @endforeach
-
-                                {{--<!--begin comments_box -->--}}
-                                {{--<div class="comments_box">--}}
-                                    {{--<img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">--}}
-                                    {{--<!--begin post_text -->--}}
-                                    {{--<div class="post_text">--}}
-
-                                        {{--<h5> testingg</h5>--}}
-
-
-                                        {{--<p style="font-size: 11px">testingg</p>--}}
-                                        {{--<ul class="post_info"></ul>--}}
-                                        {{--<p>testinggg</p>--}}
-                                    {{--</div>--}}
-                                    {{--<!--end post_text -->--}}
-                                {{--</div>--}}
-                                {{--<!--end comments_box -->--}}
-
-                                {{--<!--begin comments_box -->--}}
-                                {{--<div class="comments_box">--}}
-                                    {{--<img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">--}}
-                                    {{--<!--begin post_text -->--}}
-                                    {{--<div class="post_text">--}}
-
-                                        {{--<h5> testingg</h5>--}}
-
-
-                                        {{--<p style="font-size: 11px">testingg</p>--}}
-                                        {{--<ul class="post_info"></ul>--}}
-                                        {{--<p>testinggg</p>--}}
-                                    {{--</div>--}}
-                                    {{--<!--end post_text -->--}}
-                                {{--</div>--}}
-                                {{--<!--end comments_box -->--}}
 
 
                             </div>
@@ -119,7 +82,7 @@
             </div>
         </div>
         <!--end container-->
-
+        </div>
     </section>
 
     <!-- /.modal compose message -->
@@ -131,15 +94,16 @@
                     <h4 class="modal-title">Kirim Pesan</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" class="form-horizontal" action="/messagePost" method="post" enctype="multipart/form-data">
-                        @foreach($modalpesan as $x)
+                    <form role="form" class="form-horizontal" action="/messageReply" method="post" enctype="multipart/form-data">
+
                             <div class="form-group">
                                 <label class="col-sm-2" for="inputTo">Kepada</label>
-                                <input type="hidden" name="idAcara" class="form-control" value="{{ $x->acara_id }}">
-                                <input type="hidden" name="idPenerima" class="form-control" value="{{ $x->penerima_id }}">
-                                @foreach(\App\modelUser::where('id',$x->penerima_id)->get() as $user)
-                                    <div class="col-sm-10"><input disabled type="text" class="form-control" id="nameModal" placeholder="comma separated list of recipients" value="{{ $user->nama }}"></div>
-                                @endforeach
+                                <input type="hidden" id="modal_idacara" name="idAcara" class="form-control" value="">
+                                <input type="hidden" id="modal_idpenerima" name="idPenerima" class="form-control" value="">
+                                <input type="hidden" id="modal_kode" name="kode" class="form-control" value="">
+
+                                <div class="col-sm-10"><input disabled type="text" class="form-control" id="modal_nama" placeholder="comma separated list of recipients" value=""></div>
+
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-12" for="inputBody">Pesan</label>
@@ -149,7 +113,7 @@
                                 <label class="col-sm-12" for="inputBody">Lampiran</label>
                                 <div class="col-sm-12"><input type="file" class="form-control" id="inputSubject" placeholder="subject" name="lampiran"></div>
                             </div>
-                        @endforeach
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
@@ -163,6 +127,22 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal compose message -->
+    <script type="text/javascript">
+        $(document).ready(function(){
 
+            var idPenerima = $('#idPenerima').val();
+            var idPengirim = $('#idPengirim').val();
+            var idAcara = $('#idAcara').val();
+            var kode = $('#kode').val();
+            var namaUser = $('#namaUser').val();
+            console.log(idPenerima);
+
+
+            $('#modal_idacara').val(idAcara);
+            $('#modal_idpenerima').val(idPenerima);
+            $('#modal_kode').val(kode);
+            $('#modal_nama').val(namaUser);
+        })
+    </script>
 
 @endsection

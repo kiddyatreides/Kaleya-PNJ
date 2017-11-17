@@ -67,14 +67,14 @@
                         </table>
 
 
-                        @if(count($countpesan) > 0)
+                        @if(count($countpesan) < 1)
                             @if(\Illuminate\Support\Facades\Session::get('tipe') != 1 OR \Illuminate\Support\Facades\Session::get('tipe') != 2)
                                 <hr>
                                 <p>*<b> Tertarik untuk kerjasama? Kirimkan pesan!</b></p>
                                 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCompose">Kirim Pesan</button>
                             @endif
                         @else
-                            <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara.</div>
+                            <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara. <br><a href="/home/pesan_masuk">Klik disini untuk melihat pesan masuk</a> </div>
                         @endif
 
                     </div>
