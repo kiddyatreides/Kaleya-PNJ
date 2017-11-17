@@ -5,6 +5,30 @@
     <div class="container">
 
         <!--begin row -->
+        <div class="row footer-top">
+
+
+
+            <!--begin col-md-3 -->
+            <div class="col-md-3">
+
+                <h4>Hubungi Kami</h4>
+
+                <p>Kaleya, tunjukkan karya, melalui acara..</p>
+
+                <p class="contact_info"><i class="icon icon-pin-map"></i> Politeknik Negeri Jakarta, Depok, Jawa Barat, Indonesia</p>
+
+                <p class="contact_info"><i class="icon icon-email-envelope"></i> <a href="mailto:contact@email.com">team-bravo@pnj.ac.id</a></p>
+
+                <p class="contact_info"><i class="icon icon-call-phone"></i> +62 8383 784 090 51</p>
+
+            </div>
+            <!--end col-md-3 -->
+
+        </div>
+        <!--end row -->
+
+        <!--begin row -->
         <div class="row">
 
             <!--begin footer-bottom -->
@@ -15,7 +39,7 @@
 
                     <!--begin copyright -->
                     <div class="copyright ">
-                        <p>© 2017 Kaleya</p>
+                        <p>© 2017 Kaleya. Created by <a href="http://pnj.ac.id" target="_blank">Team Bravo PNJ</a></p>
 
                     </div>
                     <!--end copyright -->
@@ -31,44 +55,7 @@
                 </div>
                 <!--end col-md-2 -->
 
-                <!--begin col-md-5 -->
-                <div class="col-md-5">
 
-                    <!--begin footer_social -->
-                    <ul class="footer_social">
-                        <li>
-                            Follow Us:
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon icon-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon icon-pinterest"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon icon-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon icon-instagram"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon icon-skype"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!--end footer_social -->
-
-                </div>
-                <!--end col-md-5 -->
 
             </div>
             <!--end footer-bottom -->

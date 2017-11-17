@@ -94,9 +94,9 @@ class PesanController extends Controller
                 if(!empty($file)){
                     $ext = $file->getClientOriginalExtension();
                     $name = time().'.'.$ext;
-                    $file->move('uploads/acara',$name);
+                    $file->move('uploads/acara/',$name);
                     $data->lampiran = $name;
-                    $data->url_lampiran = url('uploads/acara/').$name;
+                    $data->url_lampiran = url('uploads/acara')."/".$name;
                 }
                 else{
                     $data->lampiran = null;
@@ -132,9 +132,9 @@ class PesanController extends Controller
             if(!empty($file)){
                 $ext = $file->getClientOriginalExtension();
                 $name = time().'.'.$ext;
-                $file->move('uploads/acara',$name);
+                $file->move('uploads/acara/',$name);
                 $data->lampiran = $name;
-                $data->url_lampiran = url('uploads/acara/').$name;
+                $data->url_lampiran = url('uploads/acara')."/".$name;
             }
             else{
                 $data->lampiran = null;

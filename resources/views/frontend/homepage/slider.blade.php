@@ -31,7 +31,7 @@
                          data-paddingbottom="[0,0,0,0]"
                          data-paddingleft="[0,0,0,0]"
 
-                         style="z-index: 5;text-transform:left;border-width:0px;"><img src="/frontend/images/rs1.png" alt="" data-ww="['550','550','275px','192px']" data-hh="['380','380','190px','133px']" width="550" height="385" data-no-retina> </div>
+                         style="z-index: 5;text-transform:left;border-width:0px;"><img src="/frontend/images/kaleyaicon.png" alt="" data-ww="['475px']" data-hh="['233px']" width="550" height="125" data-no-retina> </div>
 
                     <!-- LAYER NR. 2 -->
                     <div class="tp-caption Newspaper-Title   tp-resizeme"
@@ -127,7 +127,7 @@
                          data-paddingbottom="[0,0,0,0]"
                          data-paddingleft="[0,0,0,0]"
 
-                         style="z-index: 5;text-transform:left;border-width:0px;"><img src="/frontend/images/rs2.png" alt="" data-ww="['550]" data-hh="['386']" width="550" height="386" data-no-retina> </div>
+                         style="z-index: 5;text-transform:left;border-width:0px;"><img src="/frontend/images/icon/icon-penerima-pesan.jpg" alt="" data-ww="['350]" data-hh="['286']" width="550" height="100" data-no-retina> </div>
 
                     <!-- LAYER NR. 6 -->
                     <div class="tp-caption Newspaper-Title   tp-resizeme"

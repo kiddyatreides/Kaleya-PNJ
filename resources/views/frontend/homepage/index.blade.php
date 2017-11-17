@@ -394,7 +394,7 @@
 
                                     <img src="/frontend/images/process5.jpg" alt="" class="width-100">
 
-                                    <p class="process-description">Kamu akan dihubungi oleh pihak ketiga untuk menawarkan sejumlah kerjasama!</p>
+                                    <p class="process-description">Dapatkan kerjasama dari pihak ketiga!</p>
 
                                 </div>
 

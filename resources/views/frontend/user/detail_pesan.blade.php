@@ -7,26 +7,8 @@
 
         <!--begin container-->
         <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-md-2">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            Kaleya
-                        </button>
-                    </div>
-                </div>
-                <div class="col-sm-9 col-md-10">
-
-                </div>
-            </div>
             <hr />
             <div class="row">
-                <div class="col-sm-3 col-md-2">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#"><span class="badge pull-right">1546</span> Inbox </a></li>
-                        <li><a style='color:blue;' href="#">Sent Mail</a></li>
-                    </ul>
-                </div>
                 <div class="col-sm-9 col-md-10">
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -46,7 +28,7 @@
                                                 <img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">
                                                 <!--begin post_text -->
                                                     @if($x->penerima_id != \Illuminate\Support\Facades\Session::get('id'))
-                                                        <div class="post_text" style="background-color: grey!important">
+                                                        <div class="post_text" style="background-color: #8D6E63!important">
                                                     @else
                                                         <div class="post_text">
                                                     @endif
@@ -57,11 +39,19 @@
                                                                     <p style="font-size: 11px; color: black">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
                                                                     {{--<ul class="post_info"></ul>--}}
                                                                     <p style="color: black">{{ $x->pesan }}</p>
+
+                                                                    @if($x->lampiran != null)
+                                                                        <span class="glyphicon glyphicon-paperclip"></span> <a href="{{ $x->url_lampiran }}" target="_blank">{{ $x->lampiran }}</a>
+                                                                    @endif
                                                             @else
                                                                 <h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font></h5>
                                                                 <p style="font-size: 11px; color: white">{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans() }}</p>
                                                                 {{--<ul class="post_info"></ul>--}}
                                                                 <p style="color: white">{{ $x->pesan }}</p>
+
+                                                                    @if($x->lampiran != null)
+                                                                        <span class="glyphicon glyphicon-paperclip"></span><a style="color: #FDE3A7;" href="{{ $x->url_lampiran }}" target="_blank">{{ $x->lampiran }}</a>
+                                                                    @endif
                                                             @endif
                                                         @endforeach
 

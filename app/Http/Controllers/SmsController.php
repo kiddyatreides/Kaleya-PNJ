@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
 class smsController extends Controller
 {
     //
 
-    public function store(Request $request){
+    public function store(){
         try{
-            $to = $request->input('nohp');
-            $pesan = $request->input('pesan');
+            $to = Session::get('nohp');
 
             $secret = '145b65bbc129f3e6';
             $key = 'e2b75407';
@@ -20,19 +20,19 @@ class smsController extends Controller
             $basic  = new \Nexmo\Client\Credentials\Basic($key, $secret);
             $client = new \Nexmo\Client($basic);
 
+            $pesan = "Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara. \n \n";
+
             $message = $client->message()->send([
                 'to' => $to,
-                'from' => 'Kiddy Ganteng',
+                'from' => 'Kaleya',
                 'text' => $pesan
             ]);
 
             if($message){
-                $data['message'] = "ok";
-                return response($data);
+                return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Berhasil Daftar !", "success")</script>');
             }
             else{
-                $data['message'] = "bad";
-                return response($data);
+                return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Gagal Daftar!" ,  "error" )</script>');
             }
         }
         catch (Exception $e){
@@ -40,31 +40,4 @@ class smsController extends Controller
         }
     }
 
-    public function getData(){
-        return response('ok');
-    }
-
-    public function testGetData(){
-        $client = new \GuzzleHttp\Client();
-
-    }
-
-    public function sendSms(Request $request){
-        $to = $request->input('nohp');
-        $pesan = $request->input('pesan');
-
-        $secret = '6iz1mp';
-        $key = 'secret';
-
-        $ch = curl_init(); //buat resourcce cURL
-        $url = "https://reguler.zenziva.net/apps/smsapi.php?userkey=$secret&passkey=$key&nohp=$to&pesan=$pesan";
-        //set opsi URL dan opsi FOLLOWLOCATION
-        curl_setopt($ch, CURLOPT_URL, $url);
-
-        //dapatkan halaman URL
-        curl_exec($ch);
-
-        print_r(curl_getinfo($ch));
-
-    }
 }

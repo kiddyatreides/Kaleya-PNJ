@@ -36,13 +36,18 @@
 <link rel="stylesheet" type="text/css" href="/frontend/revolution/css/navigation.css">
 
 <!-- Font Favicon -->
-<link rel="shortcut icon" href="/frontend/images/favicon.ico">
+<link rel="shortcut icon" href="/frontend/images/iconatas.png">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="/frontend/calendar/js/fullcalendar.min.css">
+
+<!--SLICE BOX -->
+<link rel="stylesheet" type="text/css" href="/frontend/slider/css/slicebox.css" />
+<script type="text/javascript" src="/frontend/slider/js/modernizr.custom.46884.js"></script>
+<link rel="stylesheet" type="text/css" href="/frontend/slider/css/custom.css" />
 
 <style>
     #calendar {

@@ -1,32 +1,14 @@
 @extends('frontend.base')
 @section('content')
 
-    @include('frontend.user.menu', ['menu' => 'Home' ])
+    @include('frontend.user.menu', ['menu' => 'Pesan' ])
 
     <section class="section-white small-padding">
 
         <!--begin container-->
         <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-md-2">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            Kaleya
-                        </button>
-                    </div>
-                </div>
-                <div class="col-sm-9 col-md-10">
-
-                </div>
-            </div>
             <hr />
             <div class="row">
-                <div class="col-sm-3 col-md-2">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#"><span class="badge pull-right">1546</span> Inbox </a></li>
-                        <li class="active"><a style='color:white;' href="#">Sent Mail</a></li>
-                    </ul>
-                </div>
                 <div class="col-sm-9 col-md-10">
                     <!-- Tab panes -->
                     <div class="tab-content">

@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="index.html" class="navbar-brand brand scrool"><img src="/frontend/images/logo.png" alt="Logo"></a>
+            <a href="/" class="navbar-brand brand scrool"><img src="/frontend/images/kaleyaicon.png" alt="Logo"></a>
         </div>
         <!-- end navbar-header -->
 
@@ -22,7 +22,7 @@
             <!-- begin nav -->
             <ul class="nav navbar-nav text-right">
 
-                <li><a class="selected" href="index.html">Home</a></li>
+                <li><a class="selected" href="/">Home</a></li>
 
                 {{--<li class="dropdown"><a href="about-us.html" data-toggle="dropdown" class="dropdown-toggle">Pages</a>--}}
                     {{--<ul class="dropdown-menu">--}}
@@ -126,7 +126,7 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 @if(!\Illuminate\Support\Facades\Session::get('login'))
-                    <li><a href="contact-us.html">Contact</a></li>
+
 
                     <li><a href="/login" class="purchase scrool">MASUK / DAFTAR</a></li>
                 @else
