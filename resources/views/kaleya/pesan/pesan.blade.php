@@ -60,6 +60,7 @@
 								<div class="mailbox-read-info">
 									@foreach(\App\modelUser::where('id',$pesans->pengirim_id)->get() as $users)
 									@if($pesans->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+									<input type="hidden" id="namaUser" value="{{ $users->nama }}" />
 									<h5>{{ $users->nama }}
 										@else
 										<h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font>
@@ -132,24 +133,3 @@
 						<!-- /.content -->
 					</div>
 					@endsection
-					<script type="text/javascript">
-						$(document).ready(function(){
-
-							var idPenerima = $('#idPenerima').val();
-							var idPengirim = $('#idPengirim').val();
-							var idAcara = $('#idAcara').val();
-							var kode = $('#kode').val();
-							var namaUser = $('#namaUser').val();
-							console.log(idPenerima);
-							console.log(idPengirim);
-							console.log(idAcara);
-							console.log(kode);
-							console.log(namaUser);
-
-
-							$('#modal_idacara').val(idAcara);
-							$('#modal_idpenerima').val(idPenerima);
-							$('#modal_kode').val(kode);
-							$('#modal_nama').val(namaUser);
-						})
-					</script>
