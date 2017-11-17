@@ -15,7 +15,7 @@ class CreatePesanHeader extends Migration
     {
         Schema::create('pesan_header', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode',220);
+            $table->string('kode',100);
             $table->timestamps();
         });
     }

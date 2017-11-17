@@ -86,6 +86,7 @@ class PesanController extends Controller
 
             if($header->save()){
                 $data = new modelPesan();
+                $data->kode = $kode;
                 $data->acara_id = $request->idAcara;
                 $data->pengirim_id = Session::get('id');
                 $data->penerima_id = $request->idPenerima;
