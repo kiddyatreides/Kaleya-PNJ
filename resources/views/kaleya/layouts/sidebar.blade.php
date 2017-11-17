@@ -13,13 +13,6 @@
     </div>
     <!-- search form -->
     <form action="#" method="get" class="sidebar-form">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search...">
-        <span class="input-group-btn">
-          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
     </form>
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -29,6 +22,7 @@
         <ul class="treeview-menu">
          <li class="active"><a href="{{ route('kaleya.home') }}"><i class="fa fa-circle-o"></i> Home</a></li>
          <li class="active"><a href="{{ route('acara.index') }}"><i class="fa fa-circle-o"></i> Acara</a></li>
+         <li class="active"><a href="{{ route('pesan.index') }}"><i class="fa fa-envelope"></i> Pesan</a></li>
        </ul>
      </li>
    </ul>

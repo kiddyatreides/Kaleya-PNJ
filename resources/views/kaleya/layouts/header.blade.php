@@ -14,16 +14,11 @@
     </a>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-            </a>
-          </li>
         <!-- Messages: style can be found in dropdown.less-->
         
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href="{{ route('kaleya.home') }}" class="dropdown-toggle" data-toggle="dropdown">
             <span class="hidden-xs"> {{ \Illuminate\Support\Facades\Session::get('name') }}
             </span>
           </a>
@@ -31,36 +26,23 @@
             <!-- User image -->
             <li class="user-header">
               <p>
-                 {{ \Illuminate\Support\Facades\Session::get('name') }} - KALEYA
-                <small>Member since Nov. 2012</small>
-              </p>
-            </li>
-            <!-- Menu Body -->
-            
-            <!-- /.row -->
-          </li>
-          <!-- Menu Footer-->
-          <li class="user-footer">
-            <div class="pull-right">
-             {{--  @if(Auth::guest()) --}}
-             <a href="/logout">Logout</a>
-                        {{-- @else
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
+               {{ \Illuminate\Support\Facades\Session::get('name') }} - KALEYA
+             </p>
+               <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+           </li>
+           <!-- Menu Body -->
 
-                        <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                        @endif --}}
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <!-- Control Sidebar Toggle Button -->
-              </ul>
-            </div>
-          </nav>
-        </header>
+           <!-- /.row -->
+         </li>
+         <!-- Menu Footer-->
+         <li class="user-footer">
+          <small>KALEYA - Kalender Budaya</small>
+        </li>
+      </ul>
+    </ul>
+  </li>
+  <!-- Control Sidebar Toggle Button -->
+</ul>
+</div>
+</nav>
+</header>
