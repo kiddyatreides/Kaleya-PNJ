@@ -100,7 +100,7 @@ class PesanAcaraController extends Controller
         }
     }
 
-    public function messageReply(Request $request)
+    public function messageAcaraReply(Request $request)
     {
         try {
             $data = new modelPesan();

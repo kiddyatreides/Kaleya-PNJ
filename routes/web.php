@@ -26,7 +26,11 @@ Route::middleware(['checkLogin'])->group(function () {
 
     //backend
     Route::get('kaleya/home','Acara\HomeController@index')->name('kaleya.home');
+<<<<<<< HEAD
 
+=======
+    Route::post('messageAcaraReply','Acara\PesanAcaraController@messageAcaraReply');
+>>>>>>> c3ae55a91c97fec41f6774f8f07daf64524bf8c9
 //    Route::get('kaleya/acara','Acara\AcaraController@index');
 //    Route::get('kaleya/acara/create','Acara\AcaraController@create');
 

@@ -14,6 +14,28 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
+
+<script type="text/javascript">
+						$(document).ready(function(){
+
+							var idPenerima = $('#idPenerima').val();
+							var idPengirim = $('#idPengirim').val();
+							var idAcara = $('#idAcara').val();
+							var kode = $('#kode').val();
+							var namaUser = $('#namaUser').val();
+							console.log(idPenerima);
+							console.log(idPengirim);
+							console.log(idAcara);
+							console.log(kode);
+							console.log(namaUser);
+
+
+							$('#modal_idacara').val(idAcara);
+							$('#modal_idpenerima').val(idPenerima);
+							$('#modal_kode').val(kode);
+							$('#modal_nama').val(namaUser);
+						})
+					</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('acara/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- Morris.js charts -->
