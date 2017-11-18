@@ -72,8 +72,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat Acara</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="input alamat">
+
+                                <br>
+                                <input id="pac-input" class="controls form-control" name="alamat" type="text"
+                                       placeholder="Enter a location">
+                                <input  type="hidden" id="lat" name="lat">
+                                <input type="hidden" id="long" name="long">
                             </div>
+
+
                         </div>
                         <div class="col-lg-6">
                             <small>Open For:</small>
@@ -112,11 +119,12 @@
                                     <input type="file" name="foto" id="foto">
                                 </div>
                             </div>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a type="button" href="{{ route('acara.index') }}" class="btn btn-warning">Back</a>
+                            </div>
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <a type="button" href="{{ route('acara.index') }}" class="btn btn-warning">Back</a>
-                        </div>
+
                         <!-- /.box-body -->
 
                     </form>

@@ -17,7 +17,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Acara Kaleya</h3>
-                <a class='col-lg-offset-5 btn btn-success' href="{{ route('acara.create') }}">Add Acara</a>
+                <a class='col-lg-offset-5 btn btn-success' href="{{ route('acara.create') }}">Tambah Acara</a>
                 </div>
                 <div class="box-body">
                     <div class="box">

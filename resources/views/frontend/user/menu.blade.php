@@ -21,7 +21,7 @@
                 <ol class="breadcrumb">
                     <p class="active" style="color: red">Hello, {{ \Illuminate\Support\Facades\Session::get('name') }}</p>
                     <hr>
-                    <li><a href="/home">Dashboard</a></li>
+                    <li><a href="/home">Beranda</a></li>
                     <li><a href="/home/pesan">Pesan</a></li>
 
                 </ol>

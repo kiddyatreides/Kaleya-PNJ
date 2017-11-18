@@ -50,7 +50,7 @@ class smsController extends Controller
                 'Authorization' => 'Bearer 8e9dfdfd04c9519ad09deca43c30b8c3'
             ],
             'form_params' => array(
-                'msisdn' => Session::get('nohp'),
+                'msisdn' => +"+6282213308462",
                 'content' => 'Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara.',
             )
         ]);

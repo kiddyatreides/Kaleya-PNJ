@@ -56,6 +56,8 @@ class acaraController extends Controller
         $acara->user_id = Session::get('id');
         $acara ->judul = $request ->judul;
         $acara ->deskripsi = $request ->deskripsi;
+        $acara ->latitude = $request ->lat;
+        $acara ->longitude = $request ->long;
         $file = $request->file('foto');
         if(empty($file)){
             $acara->urlfoto = null;

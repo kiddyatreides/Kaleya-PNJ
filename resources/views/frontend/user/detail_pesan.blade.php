@@ -14,9 +14,11 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
                             <div class="list-group">
+
                                 <h3>Detail Pesan - <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCompose">Balas</button></h3>
 
                                 @foreach($modalpesan as $x)
+
 
                                         <!--begin comments_box -->
                                                 <input type="hidden" id="idPenerima" value="{{ $x->penerima_id }}" />
@@ -24,14 +26,21 @@
                                                 <input type="hidden" id="idAcara" value="{{ $x->acara_id }}">
                                                 <input type="hidden" id="kode" value="{{ $x->kode }}" />
 
+                                                @foreach(\App\modelAcara::where('id',$x->acara_id)->get() as $acara)
+                                                    <input type="hidden" id="namaAcara" value="{{ $acara->judul }}">
+                                                @endforeach
+
                                                 <div class="comments_box">
-                                                <img src="/frontend/images/team3.jpg" alt="Picture" class="comments_pic">
-                                                <!--begin post_text -->
-                                                    @if($x->penerima_id != \Illuminate\Support\Facades\Session::get('id'))
-                                                        <div class="post_text" style="background-color: #8D6E63!important">
-                                                    @else
+                                                    @if($x->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+                                                        <img src="/frontend/images/icon/icon-pengirim-pesan.jpg" alt="Picture" class="comments_pic">
                                                         <div class="post_text">
+                                                    @else
+                                                        <img src="/frontend/images/icon/icon-penerima-pesan.jpg" alt="Picture" class="comments_pic">
+
+                                                                    <div class="post_text" style="background-color: #8D6E63!important">
                                                     @endif
+                                                <!--begin post_text -->
+
                                                         @foreach(\App\modelUser::where('id',$x->pengirim_id)->get() as $users)
                                                             @if($x->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
                                                                 <h5 style="color: black">{{ $users->nama }}</h5>

@@ -76,7 +76,7 @@
 										<h4 class="modal-title">Kirim Pesan</h4>
 									</div>
 									<div class="modal-body">
-										<form role="form" class="form-horizontal" action="/messageAcaraReply" method="post" enctype="multipart/form-data">
+										<form role="form" class="form-horizontal" action="/messageReply" method="post" enctype="multipart/form-data">
 
 											<div class="form-group">
 												<label class="col-sm-2" for="inputTo">Kepada</label>

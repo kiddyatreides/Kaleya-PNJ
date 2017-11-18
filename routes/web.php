@@ -22,6 +22,7 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::post('reviewPost/{id}','AcaraFrontendController@store');
     Route::post('messagePost','PesanController@messagePost');
     Route::post('messageReply','PesanController@messageReply');
+    Route::post('messageAcaraReply','PesanAcaraController@messageAcaraReply');
     Route::get('smsNotification','SmsController@store');
     Route::get('sentSMS','SmsController@sentSMS');
     Route::get('twillioSMS','SmsController@twillioSMS');

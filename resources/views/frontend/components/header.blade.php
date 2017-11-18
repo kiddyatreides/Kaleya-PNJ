@@ -22,7 +22,6 @@
             <!-- begin nav -->
             <ul class="nav navbar-nav text-right">
 
-                <li><a class="selected" href="/">Home</a></li>
 
                 {{--<li class="dropdown"><a href="about-us.html" data-toggle="dropdown" class="dropdown-toggle">Pages</a>--}}
                     {{--<ul class="dropdown-menu">--}}
@@ -130,7 +129,8 @@
 
                     <li><a href="/login" class="purchase scrool">MASUK / DAFTAR</a></li>
                 @else
-                    <li><a href="/logout" class="purchase scrool">Logout</a></li>
+                    <li><a class="" href="/home">Beranda</a></li>
+                    <li><a href="/logout" class="purchase scrool">KELUAR</a></li>
                 @endif
 
 

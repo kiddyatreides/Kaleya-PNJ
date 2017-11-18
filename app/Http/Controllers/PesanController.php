@@ -39,11 +39,10 @@ class PesanController extends Controller
     public function inboxUser(){
         try{
             $pesan = DB::table('pesan')
-                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at')
+                ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at','kode')
                 ->where('penerima_id', Session::get('id'))
-                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at')
+                ->groupBy('kode')
                 ->orderBy('created_at','desc')
-                ->limit(1)
                 ->get();
 
             $data = [
@@ -62,9 +61,8 @@ class PesanController extends Controller
             $pesan = DB::table('pesan')
                 ->select('id','penerima_id','pengirim_id','acara_id','pesan','lampiran','url_lampiran','created_at','kode')
                 ->where('pengirim_id', Session::get('id'))
-                ->groupBy('id','acara_id','penerima_id','pengirim_id','pesan','lampiran','url_lampiran','created_at','kode')
+                ->groupBy('kode')
                 ->orderBy('created_at','desc')
-                ->limit(1)
                 ->get();
 
             $data = [

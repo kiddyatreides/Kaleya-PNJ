@@ -14,7 +14,7 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
                             <div class="list-group">
-                                @if(count($pesan) <= 0)
+                                @if(count($pesan) < 0)
                                     <a href="#" class="list-group-item">
                                         <center><span class="name" style="min-width: 120px; display: inline-block;"> You don't have any message !</span></center>
                                         {{--<span class="">You have uploaded 2 files</span>--}}
@@ -29,7 +29,7 @@
                                                 <span class="name" style="min-width: 120px; display: inline-block;">{{ $user->nama }}</span>
                                             @endforeach
                                             {{--<span class="">You have asdkasdkasmd 2 files</span>--}}
-                                            <span class="text-muted" style="font-size: 11px;">{{ $pesans->pesan }}</span>
+                                            <span class="text-muted" style="font-size: 11px;">{{ substr($pesans->pesan,0,60) }} [...]</span>
                                             <span class="badge">{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</span>
                                                 @if($pesans->lampiran != null)
                                                 <span class="pull-right"><span class="glyphicon glyphicon-paperclip"></span></span>

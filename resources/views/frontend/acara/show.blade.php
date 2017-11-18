@@ -20,7 +20,7 @@
                     <!--begin popup image -->
                     <div class="popup-wrapper">
                         <div class="popup-gallery">
-                            <a href="#"><img src="/frontend/images/blog1.jpg" class="width-100" alt="pic"><span class="eye-wrapper2"><i class="icon icon-link eye-icon"></i></span></a>
+                            <a href="#"><img src="{{ url('uploads/foto') }}/{{ $x->foto }}" class="width-100" style="width: 100%; height:350px;" alt="pic"><span class="eye-wrapper2"><i class="icon icon-link eye-icon"></i></span></a>
                         </div>
                     </div>
 
@@ -67,21 +67,21 @@
                         </table>
 
 
-                        @if(count($countpesan) < 1)
+                        @if(($countpesan) < 1)
                             @if(\Illuminate\Support\Facades\Session::get('tipe') != 1 OR \Illuminate\Support\Facades\Session::get('tipe') != 2)
                                 <hr>
                                 <p>*<b> Tertarik untuk kerjasama? Kirimkan pesan!</b></p>
                                 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modalCompose">Kirim Pesan</button>
                             @endif
                         @else
-                            <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara. <br><a href="/home/pesan_masuk">Klik disini untuk melihat pesan masuk</a> </div>
+                            <div class="alert alert-success">Kamu telah mengirimkan pesan, harap tunggu balasan dari penyedia acara. <br><a href="/home/pesan">Klik disini untuk melihat pesan masuk</a> </div>
                         @endif
 
 
                             @if(\Illuminate\Support\Facades\Session::get('tipe') != 1)
                                 <hr>
                                 <p>*<b> Ingin diingatkan mengenai acara diatas?</b></p>
-                                <a class="btn btn-primary btn-md" href="/twillioSMS">Ingatkan Saya</a>
+                                <a class="btn btn-primary btn-md" href="/smsNotification">Ingatkan Saya</a>
                             @endif
 
                     </div>
@@ -94,7 +94,7 @@
                     @foreach($review as $reviews)
                     <!--begin comments_box -->
                     <div class="comments_box">
-                        <img src="/frontend/images/icon/icon-reviewer.jpg" alt="Picture" class="comments_pic">
+                        <img src="/frontend/images/icon/icon-reviewer.jpg" alt="Picture" class="comments_pic" >
                         <!--begin post_text -->
                         <div class="post_text">
                             @foreach(\App\modelUser::where('id',$reviews->user_id)->get() as $users)
@@ -112,7 +112,7 @@
 
 
                     @if(count($review_user) <= 0)
-                        <h4 class="padding-top-30">Hi, {{ \Illuminate\Support\Facades\Session::get('name') }}, tertarik untuk memberikan review? Bagaimana {{ $x->judul }} menurut kamu!</h4>
+                        <h5 class="padding-top-30">Hi, {{ \Illuminate\Support\Facades\Session::get('name') }}, tertarik untuk memberikan review? Bagaimana {{ $x->judul }} menurut kamu?</h5>
                         {{--<p>Pellentesque mattis quam non ullamcorper semper, risus vels tortor etim iacus pharetra. Nullam tellus arcu, moldis vels nibh ut, gravida moldis ipse. Prod sed pharetra nunc. Quisque ornare luctis augue vel facilisis etims mattis.</p>--}}
                         <!--begin comments_form -->
                         <form class="comments_form" action="/reviewPost/{{base64_encode($x->id)}}" method="post">
@@ -131,13 +131,43 @@
             </div>
             <!--begin col-sm-4 -->
             <div class="col-sm-4 margin-top-20">
+                <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyDPTN4XP15pt71SSLSJPo4JCfBe-Vrlpoc"></script>
+                @foreach($acaras as $x)
+                <h4>Peta Acara</h4>
+                <input type="hidden" id="lat" value="{{ $x->latitude }}">
+                <input type="hidden" id="long" value="{{ $x->longitude }}">
+                <div id="map" style="width: 400px; height: 300px;"></div>
 
+                <script type="text/javascript">
+                    var x = document.getElementById("lat").value;
+                    var y = document.getElementById("long").value;
+                    //              menentukan koordinat titik tengah peta
+                    var myLatlng = new google.maps.LatLng(x,y);
+
+                    //              pengaturan zoom dan titik tengah peta
+                    var myOptions = {
+                        zoom: 15,
+                        center: myLatlng
+                    };
+
+                    //              menampilkan output pada element
+                    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+                    //              menambahkan marker
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: "{{ $x->judul }}"
+                    });
+                </script>
+                @endforeach
+<hr>
                 <!--begin recent_posts -->
                 <h5>Acara Terbaru</h5>
                 @foreach($recent as $recents)
                     <div class="sidebar_posts">
-                        <a href="#" title=""><img src="/frontend/images/footer1.jpg" alt=""></a>
-                        <a href="/acara/{{base64_encode($x->id)}}" title="">{{ $recents->judul }}</a>
+                        <a href="#" title=""><img src="{{ url('uploads/foto') }}/{{ $recents->foto }}" alt=""></a>
+                        <a href="/acara/{{base64_encode($recents->id)}}" title="">{{ $recents->judul }}</a>
                         <span class="sidebar_post_date">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($recents->created_at))->diffForHumans() }}</span>
                     </div>
                 @endforeach
