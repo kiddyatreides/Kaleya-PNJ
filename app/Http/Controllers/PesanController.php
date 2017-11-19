@@ -8,6 +8,7 @@ use App\modelUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
@@ -152,4 +153,6 @@ class PesanController extends Controller
             return $e->getMessage();
         }
     }
+
+
 }

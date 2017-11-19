@@ -37,7 +37,9 @@
 									@foreach(\App\modelUser::where('id',$pesans->pengirim_id)->get() as $users)
 									@if($pesans->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
 									<input type="hidden" id="namaUser" value="{{ $users->nama }}" />
-									<h5>{{ $users->nama }}
+										@foreach(\App\modelTipe::where('id',$users->tipe)->get() as $tipe)
+									<h5>{{ $users->nama }} ({{ $tipe->nama }})
+										@endforeach
 										@else
 										<h5 style="color: white">You <font style="font-size: 12px;">({{ $users->nama }})</font>
 											@endif

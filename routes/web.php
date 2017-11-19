@@ -26,6 +26,7 @@ Route::middleware(['checkLogin'])->group(function () {
     Route::get('smsNotification','SmsController@store');
     Route::get('sentSMS','SmsController@sentSMS');
     Route::get('twillioSMS','SmsController@twillioSMS');
+    Route::get('email/{email}','SmsController@send');
 
     //backend
     Route::get('kaleya/home','Acara\HomeController@index')->name('kaleya.home');

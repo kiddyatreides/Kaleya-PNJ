@@ -23,6 +23,14 @@
                             <a href="#"><img src="{{ url('uploads/foto') }}/{{ $x->foto }}" class="width-100" style="width: 100%; height:350px;" alt="pic"><span class="eye-wrapper2"><i class="icon icon-link eye-icon"></i></span></a>
                         </div>
                     </div>
+                        <div id="share"></div>
+
+                        <script src="/frontend/jssocial/jssocials.min.js"></script>
+                        <script>
+                            $("#share").jsSocials({
+                                shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+                            });
+                        </script>
 
                     <!--begin popup image -->
 

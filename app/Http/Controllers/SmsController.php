@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\modelUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 use Twilio\Rest\Client;
@@ -22,6 +24,8 @@ class smsController extends Controller
             $client = new \Nexmo\Client($basic);
 
             $pesan = "Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara. \n \n";
+
+            $this->send(Session::get('email'));
 
             $message = $client->message()->send([
                 'to' => "+6282213308462",
@@ -56,10 +60,10 @@ class smsController extends Controller
         ]);
 
         if($message){
-            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Berhasil Daftar !", "success")</script>');
+            return back()->with('sweet-alert','<script> window.onload = swal("Sukses!", "Berhasil Kirim Pesan !", "success")</script>');
         }
         else{
-            return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Gagal Daftar!" ,  "error" )</script>');
+            return back()->with('sweet-alert','<script> window.onload = swal ( "Oops !" ,  "Gagal Kirim Pesan!" ,  "error" )</script>');
         }
     }
 
@@ -83,6 +87,24 @@ class smsController extends Controller
                 'body' => 'Terimakasih telah mendaftar ke KALEYA. Kami akan mengingatkan kamu untuk datang ke acara yang kamu minta saat H-2 Acara.'
             )
         );
+    }
+
+    public function send($email)
+    {
+        try{
+            $data = modelUser::where('email',$email)->first();
+
+            $sending = Mail::send('email', ['nama' => $data->nama], function ($message) use ($data)
+            {
+                $message->subject('Pengingat Kaleya');
+                $message->from('donotreply@kaleya.id', 'Kaleya');
+                $message->to($data->email);
+            });
+        }
+        catch (Exception $e){
+            $promotion = $e->getMessage();
+            return response()->json($promotion);
+        }
     }
 
 }

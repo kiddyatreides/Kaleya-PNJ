@@ -48,6 +48,9 @@
 <link rel="stylesheet" type="text/css" href="/frontend/slider/css/slicebox.css" />
 <script type="text/javascript" src="/frontend/slider/js/modernizr.custom.46884.js"></script>
 <link rel="stylesheet" type="text/css" href="/frontend/slider/css/custom.css" />
+<!-- js Social -->
+<link rel="stylesheet" type="text/css" href="/frontend/jssocial/jssocials.css" />
+<link rel="stylesheet" type="text/css" href="/frontend/jssocial/jssocials-theme-flat.css" />
 
 <style>
     #calendar {
